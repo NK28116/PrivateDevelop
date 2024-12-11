@@ -157,10 +157,14 @@
 										<label>Count: <input type="number" id="inputhistorycount" value="20" step="1" min="1" max="50" class="inputnumber" oninput="formatInputNumber(this); updateInputHistoryToggle();" onchange="updateInputHistoryToggle();"></label>
 										<label>Game:
 											<select id="inputhistorygame" onchange="updateInputHistoryToggle();">
+												<!--SF5での8ボタン(6+PK同時押し2種)-->>
 												<option value="default" selected>Default</option>
+												<!--8ボタン割り当てはdefaultを改変すればOKな気がする-->>
+												<!--鉄拳4ボタン(4+4C2)-->
 												<option value="tekken">Tekken</option>
 											</select>
 										</label>
+										<!--鉄拳の4ボタン式にリマッピング-->>
 										<fieldset id="inputhistorytekkenfieldset" class="invisiblefieldset">
 											<label>Button mapping: Button#:
 												<select id="inputhistorytekkenbtn" onchange="updateInputHistoryTekkenBtn();">
@@ -207,6 +211,7 @@
 												</select>
 											</label>
 										</fieldset>
+
 									</fieldset>
 								</fieldset>
 								<fieldset id="stickbuttonconfig" class="invisiblefieldset">

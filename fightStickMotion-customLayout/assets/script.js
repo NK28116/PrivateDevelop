@@ -753,6 +753,18 @@ function updateInputHistoryToggle()
 	removeClassNameById("container", "hide");
 }
 
+/**
+ * Generates the CSS style for the input history elements based on the custom layout settings.
+ *
+ * The generated style includes the background images for the input history elements and the
+ * input history arrow element. The background images are chosen based on the currently selected
+ * custom layout and the input history game setting.
+ *
+ * The generated style is placed in a <style> element with the id "inputhistorystyle" in the
+ * document's head.
+ *
+ * @return {undefined}
+ */
 function updateInputHistoryStyle()
 {
 	var style = "";
