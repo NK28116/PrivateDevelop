@@ -1,7 +1,8 @@
 var currentversion = "210124";
 
-function onLoadLayout(data)
+function onLoadLayout(data: any)
 {
+// @ts-expect-error TS(7009): 'new' expression, whose target lacks a construct s... Remove this comment to see the full error message
 	var layout = new copyLayout(data);
 	if(layout === null)
 		return;
@@ -9,40 +10,59 @@ function onLoadLayout(data)
 
 	resetgamepad();
 
+// @ts-expect-error TS(2531): Object is possibly 'null'.
 	document.getElementById("inputhistorytoggle").checked = customlayout.inputhistorymode.toggle;
+// @ts-expect-error TS(2531): Object is possibly 'null'.
 	document.getElementById(
 		(customlayout.inputhistorymode.direction === 1) ? "inputhistoryhorizontal" :
+// @ts-expect-error TS(2339): Property 'checked' does not exist on type 'HTMLEle... Remove this comment to see the full error message
 			((customlayout.inputhistorymode.direction === 2) ? "inputhistoryhorizontalup" : "inputhistoryvertical")).checked = true;
+// @ts-expect-error TS(2531): Object is possibly 'null'.
 	document.getElementById("inputhistorycount").value = customlayout.inputhistorymode.count;
+// @ts-expect-error TS(2531): Object is possibly 'null'.
 	document.getElementById("inputhistorygame").value = customlayout.inputhistorymode.game || "default";
+// @ts-expect-error TS(2531): Object is possibly 'null'.
 	document.getElementById("inputhistorytoggle").onchange();
 
 	e = document.getElementById("customlayoutfilename");
+// @ts-expect-error TS(2531): Object is possibly 'null'.
 	e.value = customlayout.name;
+// @ts-expect-error TS(2531): Object is possibly 'null'.
 	e.onchange();
 
 	e = document.getElementById("custombackgroundshow");
+// @ts-expect-error TS(2531): Object is possibly 'null'.
 	e.checked = !customlayout.background || customlayout.background.show;
 	getBackgroundValue();
+// @ts-expect-error TS(2531): Object is possibly 'null'.
 	e.onchange();
 
 	e = document.getElementById("customshowstick");
+// @ts-expect-error TS(2531): Object is possibly 'null'.
 	e.checked = customlayout.showstick;
+// @ts-expect-error TS(2531): Object is possibly 'null'.
 	e.onchange();
 
 	e = document.getElementById("customtotalbuttons");
+// @ts-expect-error TS(2531): Object is possibly 'null'.
 	e.value = customlayout.totalbuttonshow;
+// @ts-expect-error TS(2531): Object is possibly 'null'.
 	e.onchange();
 
 	e = document.getElementById("custombuttondefault");
+// @ts-expect-error TS(2531): Object is possibly 'null'.
 	e.checked = true;
+// @ts-expect-error TS(2531): Object is possibly 'null'.
 	e.onchange();
 
 	var e = document.getElementById("customlayouttoggle");
+// @ts-expect-error TS(2531): Object is possibly 'null'.
 	e.checked = true;
+// @ts-expect-error TS(2531): Object is possibly 'null'.
 	e.onchange();
 }
 
+// @ts-expect-error TS(7006): Parameter 'filename' implicitly has an 'any' type.
 function loadJSON(filename)
 {
 	var json = document.head.getElementsByClassName("json")[0];
@@ -57,11 +77,13 @@ function loadJSON(filename)
 	document.head.appendChild(script);
 }
 
+// @ts-expect-error TS(7006): Parameter 'file' implicitly has an 'any' type.
 function loadLayout(file)
 {
 	var reader = new FileReader();
 
 	reader.onload = function(e) {
+// @ts-expect-error TS(2531): Object is possibly 'null'.
 		var text = e.target.result;
 //		onLoadLayout(JSON.parse(text));
 
@@ -71,6 +93,7 @@ function loadLayout(file)
 
 		var script = document.createElement('script');
 		script.type = 'text/javascript';
+// @ts-expect-error TS(2322): Type 'string | ArrayBuffer | null' is not assignab... Remove this comment to see the full error message
 		script.innerText = text;
 		script.className = "json";
 		script.async = false;
@@ -80,6 +103,7 @@ function loadLayout(file)
 	reader.readAsText(file);
 }
 
+// @ts-expect-error TS(7006): Parameter 'filename' implicitly has an 'any' type.
 function saveLayout(filename)
 {
 	var remark =
@@ -90,22 +114,32 @@ function saveLayout(filename)
 	saveToFile(filename, remark + "onLoadLayout(" + JSON.stringify(customlayout) + ");" );
 }
 
+// @ts-expect-error TS(7006): Parameter 'filename' implicitly has an 'any' type.
 function saveSetting(filename)
 {
+// @ts-expect-error TS(2531): Object is possibly 'null'.
 	var link = document.getElementById("savelinktext").value;
 	saveToFile(filename, "<html><head><meta http-equiv=\"refresh\" content=\"0; URL='" + link + "'\" /></head></html>");
 }
 
+// @ts-expect-error TS(7006): Parameter 'href' implicitly has an 'any' type.
 function loadCustomCSS(href, callback)
 {
+// @ts-expect-error TS(2304): Cannot find name 'link'.
 	link = document.createElement( "link" );
+// @ts-expect-error TS(2304): Cannot find name 'link'.
 	link.rel = "stylesheet";
+// @ts-expect-error TS(2304): Cannot find name 'link'.
 	link.type = "text/css";
+// @ts-expect-error TS(2304): Cannot find name 'link'.
 	link.href = decodeURI(href);
+// @ts-expect-error TS(2304): Cannot find name 'link'.
 	link.onload = callback;
+// @ts-expect-error TS(2304): Cannot find name 'link'.
 	document.getElementsByTagName( "head" )[0].appendChild( link );
 }
 
+// @ts-expect-error TS(7006): Parameter 'cssval' implicitly has an 'any' type.
 function getCustomCSSValue(cssval, name)
 {
 	if(cssval !== undefined)
@@ -126,9 +160,12 @@ function getCustomCSSValue(cssval, name)
     return "";
 }
 
+// @ts-expect-error TS(7006): Parameter 'filename' implicitly has an 'any' type.
 function saveToFile(filename, data)
 {
+// @ts-expect-error TS(2339): Property 'msSaveOrOpenBlob' does not exist on type... Remove this comment to see the full error message
 	if(window.navigator.msSaveOrOpenBlob)
+// @ts-expect-error TS(2339): Property 'msSaveOrOpenBlob' does not exist on type... Remove this comment to see the full error message
 		window.navigator.msSaveOrOpenBlob(new Blob([data]), filename);
 	else
 	{
@@ -142,6 +179,7 @@ function saveToFile(filename, data)
 	}
 }
 
+// @ts-expect-error TS(7006): Parameter 'el' implicitly has an 'any' type.
 function getChildByClass(el, className)
 {
 	for(var i = 0, il = el.childNodes.length; i < il; i++)
@@ -150,12 +188,15 @@ function getChildByClass(el, className)
 		for(var j = 0, jl = classes.length; j < jl; j++)
 		{
 			if (classes[j] == className)
+// @ts-expect-error TS(2304): Cannot find name 'notes'.
 				notes = el.childNodes[i];
 		}
 	}
+// @ts-expect-error TS(2304): Cannot find name 'notes'.
 	return notes;
 }
 
+// @ts-expect-error TS(7006): Parameter 'el' implicitly has an 'any' type.
 function getChildById(el, id)
 {
 	for(var i = 0, il = el.childNodes.length; i < il; i++)
@@ -164,16 +205,20 @@ function getChildById(el, id)
 		for(var j = 0, jl = classes.length; j < jl; j++)
 		{
 			if (classes[j] == id)
+// @ts-expect-error TS(2304): Cannot find name 'notes'.
 				notes = el.childNodes[i];
 		}
 	}
 
+// @ts-expect-error TS(2304): Cannot find name 'notes'.
 	if(notes == el)
 		console.log(el);
 
+// @ts-expect-error TS(2304): Cannot find name 'notes'.
 	return notes;
 }
 
+// @ts-expect-error TS(7006): Parameter 'name' implicitly has an 'any' type.
 function getParameterByName(name)
 {
 	name = name.replace(/[\[]/, "\\[").replace(/[\]]/, "\\]");
@@ -182,17 +227,21 @@ function getParameterByName(name)
 	return results === null ? "" : decodeURIComponent(results[1]/*.replace(/\+/g, " ")*/);
 }
 
+// @ts-expect-error TS(7006): Parameter 'id' implicitly has an 'any' type.
 function copyLink(id)
 {
+// @ts-expect-error TS(2531): Object is possibly 'null'.
 	document.getElementById(id).select();
 	var successful = document.execCommand("copy");
 }
 
 function getGamepads()
 {
+// @ts-expect-error TS(2339): Property 'webkitGetGamepads' does not exist on typ... Remove this comment to see the full error message
 	return navigator.getGamepads ? navigator.getGamepads() : (navigator.webkitGetGamepads ? navigator.webkitGetGamepads : []);
 }
 
+// @ts-expect-error TS(7006): Parameter 'index' implicitly has an 'any' type.
 function getGamepad(index)
 {
 	var gamepad;
@@ -223,8 +272,10 @@ function getActiveGamepad()
 					if(buttons[j].pressed)
 					{
 						var axeslen = gamepad.axes.length;
+// @ts-expect-error TS(2304): Cannot find name 'gamepadaxescenter'.
 						gamepadaxescenter = [];
 						for(var j = 0; j < axeslen; ++j)
+// @ts-expect-error TS(2304): Cannot find name 'gamepadaxescenter'.
 							gamepadaxescenter[j] = gamepad.axes[j];
 
 						return gamepad.index;
@@ -237,23 +288,31 @@ function getActiveGamepad()
 	return -1;
 }
 
+// @ts-expect-error TS(2339): Property 'requestAnimFrame' does not exist on type... Remove this comment to see the full error message
 window.requestAnimFrame = (function(){
   return  window.requestAnimationFrame       ||
+          // @ts-expect-error TS(2339): Property 'webkitRequestAnimationFrame' does not ex... Remove this comment to see the full error message
           window.webkitRequestAnimationFrame ||
+          // @ts-expect-error TS(2339): Property 'mozRequestAnimationFrame' does not exist... Remove this comment to see the full error message
           window.mozRequestAnimationFrame    ||
+          // @ts-expect-error TS(2551): Property 'oRequestAnimationFrame' does not exist o... Remove this comment to see the full error message
           window.oRequestAnimationFrame      ||
+          // @ts-expect-error TS(2551): Property 'msRequestAnimationFrame' does not exist ... Remove this comment to see the full error message
           window.msRequestAnimationFrame     ||
+          // @ts-expect-error TS(7006): Parameter 'callback' implicitly has an 'any' type.
           function(callback, element){
             window.setTimeout(callback, 1000 / 60);
           };
 })();
 
+// @ts-expect-error TS(7006): Parameter 'e' implicitly has an 'any' type.
 function setClassName(e, t)
 {
 	if(e !== undefined && e !== null)
 		e.className = t;
 }
 
+// @ts-expect-error TS(7006): Parameter 'e' implicitly has an 'any' type.
 function addClassName(e, t)
 {
 	if(e !== undefined && e !== null)
@@ -261,12 +320,14 @@ function addClassName(e, t)
 			e.className += (e.className != "") ? " " + t : t;
 }
 
+// @ts-expect-error TS(7006): Parameter 'e' implicitly has an 'any' type.
 function removeClassName(e, t)
 {
 	if(e !== undefined && e != null)
 		e.className = e.className.replace(RegExp("(^|\\s)" + t + "(\\s|$)"), " ").trim();
 }
 
+// @ts-expect-error TS(7006): Parameter 'e' implicitly has an 'any' type.
 function replaceClassName(e, o, n)
 {
 	var regex = new RegExp("\\b" + o + "\\b");
@@ -277,6 +338,7 @@ function replaceClassName(e, o, n)
 		addClassName(e, n);
 }
 
+// @ts-expect-error TS(7006): Parameter 'id' implicitly has an 'any' type.
 function setClassNameById(id, t)
 {
 	var e = document.getElementById(id);
@@ -284,34 +346,43 @@ function setClassNameById(id, t)
 		setClassName(e, t);
 }
 
+// @ts-expect-error TS(7006): Parameter 'id' implicitly has an 'any' type.
 function setElementValueById(id, val)
 {
 	var e = document.getElementById(id);
 	if(e !== undefined && e !== null)
+// @ts-expect-error TS(2339): Property 'value' does not exist on type 'HTMLEleme... Remove this comment to see the full error message
 		e.value = val;
 }
 
+// @ts-expect-error TS(7006): Parameter 'id' implicitly has an 'any' type.
 function enableById(id, enable)
 {
 	var e = document.getElementById(id);
 	if(e !== undefined && e !== null)
+// @ts-expect-error TS(2339): Property 'disabled' does not exist on type 'HTMLEl... Remove this comment to see the full error message
 		e.disabled = !enable;
 }
 
+// @ts-expect-error TS(7006): Parameter 'id' implicitly has an 'any' type.
 function setValueById(id, value)
 {
 	var e = document.getElementById(id);
 	if(e !== undefined && e !== null)
+// @ts-expect-error TS(2339): Property 'value' does not exist on type 'HTMLEleme... Remove this comment to see the full error message
 		e.value = value;
 }
 
+// @ts-expect-error TS(7006): Parameter 'id' implicitly has an 'any' type.
 function getValueById(id)
 {
 	var e = document.getElementById(id);
 	if(e !== undefined && e !== null)
+// @ts-expect-error TS(2339): Property 'value' does not exist on type 'HTMLEleme... Remove this comment to see the full error message
 		return e.value;
 }
 
+// @ts-expect-error TS(7006): Parameter 'id' implicitly has an 'any' type.
 function addClassNameById(id, name)
 {
 	var e = document.getElementById(id);
@@ -319,6 +390,7 @@ function addClassNameById(id, name)
 		addClassName(e, name);
 }
 
+// @ts-expect-error TS(7006): Parameter 'id' implicitly has an 'any' type.
 function removeClassNameById(id, name)
 {
 	var e = document.getElementById(id);
@@ -326,6 +398,7 @@ function removeClassNameById(id, name)
 		removeClassName(e, name);
 }
 
+// @ts-expect-error TS(7006): Parameter 'id' implicitly has an 'any' type.
 function toggleClassNameById(id, name, toggle)
 {
 	var e = document.getElementById(id);
@@ -338,46 +411,55 @@ function toggleClassNameById(id, name, toggle)
 	}
 }
 
+// @ts-expect-error TS(7006): Parameter 'p' implicitly has an 'any' type.
 function getGamepadElement(p)
 {
 	return document.getElementById("gamepad" + p);
 }
 
+// @ts-expect-error TS(7006): Parameter 'p' implicitly has an 'any' type.
 function getGamepadAreaElement(p)
 {
 	return getChildById(getGamepadElement(p), "gamepad-area");
 }
 
+// @ts-expect-error TS(7006): Parameter 'p' implicitly has an 'any' type.
 function getStickAreaElement(p)
 {
 	return getChildById(getGamepadAreaElement(p), "stick-area");
 }
 
+// @ts-expect-error TS(7006): Parameter 'p' implicitly has an 'any' type.
 function getButtonAreaElement(p)
 {
 	return document.getElementById("button-area");
 }
 
+// @ts-expect-error TS(7006): Parameter 'p' implicitly has an 'any' type.
 function getStickElement(p)
 {
 	return getChildById(getStickAreaElement(p), "stick");
 }
 
+// @ts-expect-error TS(7006): Parameter 'p' implicitly has an 'any' type.
 function getStickArrowElement(p, d)
 {
 	return getChildById(getStickAreaElement(p), sticknames[d] );
 }
 
+// @ts-expect-error TS(7006): Parameter 'p' implicitly has an 'any' type.
 function getStickSetupElement(p, d)
 {
 	return document.getElementById(sticknames[d]);
 }
 
+// @ts-expect-error TS(7006): Parameter 'p' implicitly has an 'any' type.
 function getButtonElement(p, b)
 {
 	return document.getElementById("button" + b);
 }
 
+// @ts-expect-error TS(7006): Parameter 'e' implicitly has an 'any' type.
 function connecthandler(e)
 {
 	if(activegamepad === -1)
@@ -388,6 +470,7 @@ function connecthandler(e)
 		{
 			showGamepadArea(true);
 
+// @ts-expect-error TS(2339): Property 'requestAnimFrame' does not exist on type... Remove this comment to see the full error message
 			window.requestAnimFrame(updateStatus);
 
 			if(polltimer !== -1)
@@ -399,6 +482,7 @@ function connecthandler(e)
 	}
 }
 
+// @ts-expect-error TS(7006): Parameter 'e' implicitly has an 'any' type.
 function disconnecthandler(e)
 {
 	var disconnected = true;
@@ -431,6 +515,7 @@ function createButtonStyle()
 	}
 }
 
+// @ts-expect-error TS(7006): Parameter 'show' implicitly has an 'any' type.
 function showGamepadArea(show)
 {
 	if(show)
@@ -445,21 +530,26 @@ function showGamepadArea(show)
 	}
 }
 
+// @ts-expect-error TS(7006): Parameter 'total' implicitly has an 'any' type.
 function removeButtons(total)
 {
 	total = defaultArg(total, customlayout.totalbuttonshow)
 
 	var btnarea = getButtonAreaElement(0);
+// @ts-expect-error TS(2531): Object is possibly 'null'.
 	var len = btnarea.childElementCount;
+// @ts-expect-error TS(2531): Object is possibly 'null'.
 	var offset = btnarea.childNodes.length - len;
 	for(var i = len - 1; i >= total; --i)
 	{
+// @ts-expect-error TS(2531): Object is possibly 'null'.
 		btnarea.removeChild(btnarea.childNodes[i + offset]);
 
 		removeButtonStyle(i);
 	}
 }
 
+// @ts-expect-error TS(7006): Parameter 'total' implicitly has an 'any' type.
 function createButtons(total)
 {
 	total = defaultArg(total, customlayout.totalbuttonshow)
@@ -468,6 +558,7 @@ function createButtons(total)
 
 	var btnarea = getButtonAreaElement(0);
 
+// @ts-expect-error TS(2531): Object is possibly 'null'.
 	for(var i = btnarea.childElementCount; i < total; ++i)
 	{
 		var btn = document.createElement("div");
@@ -476,12 +567,14 @@ function createButtons(total)
 //		btn.addEventListener("click", buttonSetup);
 		btn.addEventListener("mousedown", mousedown);
 
+// @ts-expect-error TS(2531): Object is possibly 'null'.
 		btnarea.appendChild(btn);
 
 		setButtonStyle(i);
 	}
 }
 
+// @ts-expect-error TS(7006): Parameter 'total' implicitly has an 'any' type.
 function showButtons(total)
 {
 	if(typeof total !== "undefined")
@@ -490,23 +583,34 @@ function showButtons(total)
 		customlayout.totalbuttonshow = (num < 0) ? 0 : (num > totalbuttons) ? totalbuttons : num;
 	}
 
+// @ts-expect-error TS(2554): Expected 1 arguments, but got 0.
 	createButtons();
 
+// @ts-expect-error TS(2304): Cannot find name 'e'.
 	e = document.getElementById("custombuttonn");
+// @ts-expect-error TS(2304): Cannot find name 'e'.
 	e.max = customlayout.totalbuttonshow;
+// @ts-expect-error TS(2304): Cannot find name 'e'.
 	if(Number(e.value) > e.max)
+// @ts-expect-error TS(2304): Cannot find name 'e'.
 		e.value = e.max;
+// @ts-expect-error TS(2304): Cannot find name 'e'.
 	if(e.max <= 0)
 	{
+// @ts-expect-error TS(2304): Cannot find name 'e'.
 		e.value = "";
 		getButtonValue("");
+// @ts-expect-error TS(2304): Cannot find name 'e'.
 		e.disabled = true;
 	}else
+// @ts-expect-error TS(2304): Cannot find name 'e'.
 		e.disabled = false;
 
+// @ts-expect-error TS(2304): Cannot find name 'e'.
 	e.disabled = !(e.max > 0 && document.getElementById("custombuttoncheck").checked);
 }
 
+// @ts-expect-error TS(7006): Parameter 'show' implicitly has an 'any' type.
 function showStickBlock(show)
 {
 	if(typeof show !== "undefined")
@@ -514,6 +618,7 @@ function showStickBlock(show)
 	else
 		show = customlayout.showstick;
 
+// @ts-expect-error TS(2304): Cannot find name 'gamepadid'.
 	showElement(getStickAreaElement(gamepadid), show);
 
 	getStickValue();
@@ -525,6 +630,7 @@ function showStickBlock(show)
 	enableById("customstickh", show);
 }
 
+// @ts-expect-error TS(7006): Parameter 'show' implicitly has an 'any' type.
 function showBackground(show)
 {
 	if(typeof show !== "undefined")
@@ -538,18 +644,24 @@ function showBackground(show)
 
 function resetgamepad()
 {
+// @ts-expect-error TS(2304): Cannot find name 'gamepadid'.
 	gamepadid = 0;
 
 	createButtonStyle();
 
 	showGamepadArea(false);
+// @ts-expect-error TS(2554): Expected 1 arguments, but got 0.
 	showBackground();
+// @ts-expect-error TS(2554): Expected 1 arguments, but got 0.
 	showButtons();
+// @ts-expect-error TS(2554): Expected 1 arguments, but got 0.
 	showStickBlock();
 
+// @ts-expect-error TS(2304): Cannot find name 'gamepadid'.
 	setClassName(getStickElement(gamepadid), "stick");
 	for(var i = 0; i < 4; ++i)
 	{
+// @ts-expect-error TS(2304): Cannot find name 'gamepadid'.
 		setClassName(getStickArrowElement(gamepadid, i), "stick-block " + sticknames[i]);
 	}
 
@@ -559,8 +671,10 @@ function resetgamepad()
 */
 }
 
+// @ts-expect-error TS(7006): Parameter 'text' implicitly has an 'any' type.
 function enableSetupTooltip(text)
 {
+// @ts-expect-error TS(2531): Object is possibly 'null'.
 	document.getElementById("assignbuttontooltip").innerHTML = text;
 	addClassNameById("assignbuttontooltip", "active");
 }
@@ -586,6 +700,7 @@ function clearSetupStatus()
 	}
 }
 
+// @ts-expect-error TS(7006): Parameter 'e' implicitly has an 'any' type.
 function cancelSetup(e)
 {
 	if(setbutton !== -1 && e.target.className.search("-setup") === -1)
@@ -596,6 +711,7 @@ function cancelSetup(e)
 	}
 }
 
+// @ts-expect-error TS(7006): Parameter 'e' implicitly has an 'any' type.
 function buttonSetup(e)
 {
 	clearSetupStatus();
@@ -606,6 +722,7 @@ function buttonSetup(e)
 	enableSetupTooltip("Assigning Button " + ( setbutton + 1 ) + " ...");
 }
 
+// @ts-expect-error TS(7006): Parameter 'e' implicitly has an 'any' type.
 function stickSetup(e)
 {
 	clearSetupStatus();
@@ -625,16 +742,19 @@ function stickSetup(e)
 	}
 }
 
+// @ts-expect-error TS(7006): Parameter 'id' implicitly has an 'any' type.
 function showElementById(id, show)
 {
 	showElement(document.getElementById(id), show);
 }
 
+// @ts-expect-error TS(7006): Parameter 'id' implicitly has an 'any' type.
 function hideElementById(id)
 {
 	showElementById(id, false);
 }
 
+// @ts-expect-error TS(7006): Parameter 'ele' implicitly has an 'any' type.
 function showElement(ele, show)
 {
 	if(typeof show !== "undefined" && !show )
@@ -643,11 +763,13 @@ function showElement(ele, show)
 		replaceClassName(ele, "hide", "show");
 }
 
+// @ts-expect-error TS(7006): Parameter 'ele' implicitly has an 'any' type.
 function hideElement(ele)
 {
 	showElement(ele, false);
 }
 
+// @ts-expect-error TS(7006): Parameter 'e' implicitly has an 'any' type.
 function checkInputNumber3(e)
 {
 	var n = e.valueAsNumber;
@@ -664,9 +786,11 @@ function checkInputNumber3(e)
 }
 
 function setContainerHeight() {
+// @ts-expect-error TS(2531): Object is possibly 'null'.
 	document.getElementById("container").style.height = (document.getElementById("gamepad-area").offsetHeight * options.scale) + "px";
 }
 
+// @ts-expect-error TS(7006): Parameter 'value' implicitly has an 'any' type.
 function updateScale(value)
 {
 	options.scale = parseFloat(value);
@@ -674,6 +798,7 @@ function updateScale(value)
 
 	var gamepadele = getGamepadElement(0);
 
+// @ts-expect-error TS(2531): Object is possibly 'null'.
 	gamepadele.style.transform = "scale(" + options.scale + ")";
 
 	setContainerHeight();
@@ -681,12 +806,14 @@ function updateScale(value)
 	updateLink();
 }
 
+// @ts-expect-error TS(7006): Parameter 'value' implicitly has an 'any' type.
 function updateBgOpacity(value)
 {
 	options.opacity = parseFloat(value);
 	if(isNaN(options.opacity)) options.opacity = 1;
 
 	var bgele = document.getElementById("gamepad-area-background");
+// @ts-expect-error TS(2531): Object is possibly 'null'.
 	bgele.style.opacity = options.opacity.toString();
 
 	updateLink();
@@ -704,17 +831,23 @@ function updateBgOpacity(value)
  *
  * @return {undefined}
  */
+// @ts-expect-error TS(2304): Cannot find name 'å'.
 /******  48522022-ea4e-44fc-9b5c-963d5ae6f138  *******/å
 function updateInputHistoryToggle()
 {
+// @ts-expect-error TS(2531): Object is possibly 'null'.
 	if(document.getElementById("customlayouttoggle").checked)
 	{
+// @ts-expect-error TS(2531): Object is possibly 'null'.
 		customlayout.inputhistorymode.toggle = document.getElementById("inputhistorytoggle").checked;
+// @ts-expect-error TS(2531): Object is possibly 'null'.
 		document.getElementById("inputhistoryfieldset").style.display = customlayout.inputhistorymode.toggle ? "block" : "none";
+// @ts-expect-error TS(2531): Object is possibly 'null'.
 		document.getElementById("stickbuttonconfig").style.display = customlayout.inputhistorymode.toggle ? "none" : "block";
 
 		if(customlayout.inputhistorymode.toggle)
 		{
+// @ts-expect-error TS(2531): Object is possibly 'null'.
 			customlayout.inputhistorymode.direction = parseInt(document.querySelector("input[name='inputhistorydirectionset']:checked").value);
 			customlayout.inputhistorymode.count = getValueById("inputhistorycount");
 			customlayout.inputhistorymode.game = getValueById("inputhistorygame");
@@ -734,10 +867,12 @@ function updateInputHistoryToggle()
 					removeClassNameById("inputlist", "up");
 			}
 
+// @ts-expect-error TS(2531): Object is possibly 'null'.
 			document.getElementById("inputhistorytekkenfieldset").style.display = customlayout.inputhistorymode.game === "tekken" ? "block" : "none";
 
 			updateInputHistoryTekkenBtn();
 
+// @ts-expect-error TS(2531): Object is possibly 'null'.
 			document.getElementById("stickbuttonconfig").disabled = true;
 			removeClassNameById("inputlist", "hide");
 			addClassNameById("container", "hide");
@@ -748,6 +883,7 @@ function updateInputHistoryToggle()
 		}
 	}
 
+// @ts-expect-error TS(2531): Object is possibly 'null'.
 	document.getElementById("stickbuttonconfig").disabled = false;
 	addClassNameById("inputlist", "hide");
 	removeClassNameById("container", "hide");
@@ -793,6 +929,7 @@ function updateInputHistoryStyle()
 	ele.innerHTML = style;
 }
 
+// @ts-expect-error TS(7006): Parameter 'btns' implicitly has an 'any' type.
 function updateInputHistoryStyleTekken(btns)
 {
 	return ".tekken .inputlistelement.inputlistelement" + btns.join("-") + "{background-image:url('layout/" + customlayout.name + "/btn-" + btns.join("+") + ".png');}";
@@ -808,15 +945,18 @@ function updateInputHistoryStyleTekken(btns)
  *
  * @return {undefined}
  */
+// @ts-expect-error TS(2304): Cannot find name 'å'.
 /******  e990c072-e608-40da-b70e-ff384568a542  *******/å
 function updateInputHistoryTekkenBtn()
 {
 	if(customlayout.inputhistorymode.game === "tekken")
 	{
+// @ts-expect-error TS(2531): Object is possibly 'null'.
 		var btn = parseInt(document.getElementById("inputhistorytekkenbtn").value) - 1;
 		if(!customlayout.inputhistorymode.btnmapping)
 			customlayout.inputhistorymode.btnmapping = ["1","2","3","4","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0"];
 
+// @ts-expect-error TS(2531): Object is possibly 'null'.
 		document.getElementById("inputhistorytekkenbtnmapto").value = (customlayout.inputhistorymode.btnmapping.length > btn) ? customlayout.inputhistorymode.btnmapping[btn] : "0";
 	}
 }
@@ -832,9 +972,11 @@ function updateInputHistoryTekkenBtn()
  */
 function updateInputHistoryTekkenBtnMapTo()
 {
+// @ts-expect-error TS(2531): Object is possibly 'null'.
 	customlayout.inputhistorymode.btnmapping[document.getElementById("inputhistorytekkenbtn").value - 1] = document.getElementById("inputhistorytekkenbtnmapto").value;
 }
 
+// @ts-expect-error TS(7006): Parameter 'str' implicitly has an 'any' type.
 function decodeAxisCode(str, pos)
 {
 	var val = str.substring(pos, pos + 6);
@@ -844,6 +986,7 @@ function decodeAxisCode(str, pos)
 	return parseInt(val);
 }
 
+// @ts-expect-error TS(7006): Parameter 'code' implicitly has an 'any' type.
 function decodeButtonCode(code)
 {
 	if(code >= 97 && code <= 122) // a-z
@@ -860,6 +1003,7 @@ function decodeButtonCode(code)
 	return -1;
 }
 
+// @ts-expect-error TS(7006): Parameter 'code' implicitly has an 'any' type.
 function encodeButtonCode(code)
 {
 	var str = "";
@@ -879,9 +1023,11 @@ function encodeButtonCode(code)
 	return String.fromCharCode(code + ((code < 26) ? 97 : 65 - 26));
 }
 
+// @ts-expect-error TS(7006): Parameter 'id' implicitly has an 'any' type.
 function getVaildValueAsString(id)
 {
 	var str = "";
+// @ts-expect-error TS(2531): Object is possibly 'null'.
 	var n = document.getElementById(id).valueAsNumber;
 	if(!isNaN(n))
 		str += n.toFixed(2);
@@ -889,19 +1035,27 @@ function getVaildValueAsString(id)
 	return str;
 }
 
+// @ts-expect-error TS(7006): Parameter 'id' implicitly has an 'any' type.
 function getVaildIntegerAsString(id)
 {
 	var str = "";
+// @ts-expect-error TS(2304): Cannot find name 'e'.
 	e = document.getElementById(id);
+// @ts-expect-error TS(2304): Cannot find name 'e'.
 	var n = e.valueAsNumber;
 	if(!isNaN(n))
 	{
 		n = Math.floor(n);
+// @ts-expect-error TS(2304): Cannot find name 'e'.
 		if(n < e.min)
+// @ts-expect-error TS(2304): Cannot find name 'e'.
 			n = e.min;
+// @ts-expect-error TS(2304): Cannot find name 'e'.
 		if(n > e.max)
+// @ts-expect-error TS(2304): Cannot find name 'e'.
 			n = e.max;
 
+// @ts-expect-error TS(2304): Cannot find name 'e'.
 		if(n === e.valueAsNumber)
 			str += n;
 	}
@@ -909,6 +1063,7 @@ function getVaildIntegerAsString(id)
 	return str;
 }
 
+// @ts-expect-error TS(7006): Parameter 'obj' implicitly has an 'any' type.
 function getUserSpecificString(obj, name)
 {
 	if(obj.axis !== "" && obj.value !== "")
@@ -919,6 +1074,7 @@ function getUserSpecificString(obj, name)
 	return "";
 }
 
+// @ts-expect-error TS(7006): Parameter 'axisid' implicitly has an 'any' type.
 function getUserSpecific(axisid, valueid)
 {
 	var obj = {axis : "", value : ""};
@@ -935,6 +1091,7 @@ function getUserSpecific(axisid, valueid)
 	return {axis : "", value : ""};
 }
 
+// @ts-expect-error TS(7006): Parameter 'name' implicitly has an 'any' type.
 function setUserSpecific(name, str)
 {
 	var obj = {axis : "", value : ""};
@@ -953,13 +1110,17 @@ function setUserSpecific(name, str)
 	return obj;
 }
 
+// @ts-expect-error TS(7006): Parameter 'name' implicitly has an 'any' type.
 function setUserSpecificButton(name)
 {
+// @ts-expect-error TS(2531): Object is possibly 'null'.
 	var button = parseInt(document.getElementById("userspecificb" + name).value);
 	if(!isNaN(button) && button > 0 && button <= totalbuttons)
+// @ts-expect-error TS(7053): Element implicitly has an 'any' type because expre... Remove this comment to see the full error message
 		custombutton[button - 1] = axisToButtonCode(Number(userspecific[name].axis), Number(userspecific[name].value));
 }
 
+// @ts-expect-error TS(7006): Parameter 'axis' implicitly has an 'any' type.
 function axisToButtonCode(axis, value)
 {
 	var code = value < 0 ? 2000000 : 1000000; // sign
@@ -986,12 +1147,14 @@ function updateLink()
 	var para = "";
 
 	// scale
+// @ts-expect-error TS(2531): Object is possibly 'null'.
 	var scale = document.getElementById("scalevalue").value;
 	scale = parseFloat(scale);
 	if(scale !== 1)
 		para += "&s=" + scale;
 
 	// background opacity
+// @ts-expect-error TS(2531): Object is possibly 'null'.
 	var bgopacity = document.getElementById("bgopacityvalue").value;
 	bgopacity = parseFloat(bgopacity);
 	if(bgopacity !== 1)
@@ -999,6 +1162,7 @@ function updateLink()
 
 	// user specific
 	var u = "";
+// @ts-expect-error TS(2531): Object is possibly 'null'.
 	if(document.getElementById("userspecifictoggle").checked)
 	{
 		var str = "";
@@ -1015,7 +1179,8 @@ function updateLink()
 		str += getUserSpecificString(userspecific.n, "N");
 		str += getUserSpecificString(userspecific.u, "U");
 		str += getUserSpecificString(userspecific.d, "D");
-		str += getUserSpecificString(userspecific.l, "L");
+// @ts-expect-error TS(2693): 'any' only refers to a type, but is being used as ... Remove this comment to see the full error message
+		str: any += getUserSpecificString(userspecific.l, "L");
 		str += getUserSpecificString(userspecific.r, "R");
 		str += getUserSpecificString(userspecific.ul, "UL");
 		str += getUserSpecificString(userspecific.dl, "DL");
@@ -1036,6 +1201,7 @@ function updateLink()
 	else
 	{
 		userspecific.enable = false;
+// @ts-expect-error TS(2339): Property 'status' does not exist on type '{ enable... Remove this comment to see the full error message
 		userspecific.status = [];
 	}
 
@@ -1070,17 +1236,25 @@ function updateLink()
 	para += u;
 
 	// custom layout
+// @ts-expect-error TS(2531): Object is possibly 'null'.
 	if(document.getElementById("customlayouttoggle").checked)
 	{
+// @ts-expect-error TS(2531): Object is possibly 'null'.
 		var name = document.getElementById("customlayoutfilename").value;
 
 		customlayout.name = name;
 		var pathname = "layout/" + name + "/";
+// @ts-expect-error TS(2531): Object is possibly 'null'.
 		document.getElementById("inputfilenamepathbackgroundimg").innerHTML = pathname;
+// @ts-expect-error TS(2531): Object is possibly 'null'.
 		document.getElementById("inputfilenamepathimg").innerHTML = pathname;
+// @ts-expect-error TS(2531): Object is possibly 'null'.
 		document.getElementById("inputfilenamepathimgp").innerHTML = pathname;
+// @ts-expect-error TS(2531): Object is possibly 'null'.
 		document.getElementById("tooltiptextsavefile").innerHTML = "Copy the saved file to the \"" + pathname + "\" folder";
+// @ts-expect-error TS(2531): Object is possibly 'null'.
 		document.getElementById("tooltiptextimagefile").innerHTML = "Image files must be placed under the \"" + pathname + "\" folder";
+// @ts-expect-error TS(2531): Object is possibly 'null'.
 		document.getElementById("tooltiptextimagepfile").innerHTML = "Image files must be placed under the \"" + pathname + "\" folder";
 
 		if(name !== "")
@@ -1092,21 +1266,28 @@ function updateLink()
 	}
 
 	var str = link + parasave + para;
+// @ts-expect-error TS(2531): Object is possibly 'null'.
 	document.getElementById("savelinktext").value = str;
+// @ts-expect-error TS(2531): Object is possibly 'null'.
 	document.getElementById("savelinktooltip").innerText = str;
 
 	str = link + paracustom + para;
+// @ts-expect-error TS(2531): Object is possibly 'null'.
 	document.getElementById("customlinktext").value = str;
+// @ts-expect-error TS(2531): Object is possibly 'null'.
 	document.getElementById("customlinktooltip").innerText = str;
 
 	if(location.protocol === "file:")
 		link = "http://absolute" + location.pathname;
 
 	str = link + paracustom + para;
+// @ts-expect-error TS(2531): Object is possibly 'null'.
 	document.getElementById("obsbrowserlinktext").value = str;
+// @ts-expect-error TS(2531): Object is possibly 'null'.
 	document.getElementById("obslinktooltip").innerText = str;
 }
 
+// @ts-expect-error TS(7006): Parameter 'obj' implicitly has an 'any' type.
 function checkUserSpecificStickTilted(obj, gamepad)
 {
 	if(obj.axis === "" || obj.value === "")
@@ -1126,6 +1307,7 @@ function checkUserSpecificStickTilted(obj, gamepad)
 	return 0;
 }
 
+// @ts-expect-error TS(7006): Parameter 'obj' implicitly has an 'any' type.
 function checkUserSpecificStick(obj, neutral_obj, gamepad)
 {
 	if(obj.axis === "" || obj.value === "")
@@ -1159,6 +1341,7 @@ function checkUserSpecificStick(obj, neutral_obj, gamepad)
 	return 0;
 }
 
+// @ts-expect-error TS(7006): Parameter 'btn' implicitly has an 'any' type.
 function checkGamepadButton(btn, gamepad)
 {
 	if(btn >= 1000000) // axes
@@ -1182,10 +1365,13 @@ function checkGamepadButton(btn, gamepad)
 		{
 			if(userspecific.enable)
 			{
+// @ts-expect-error TS(2339): Property 'status' does not exist on type '{ enable... Remove this comment to see the full error message
 				for(var i = 0; i < userspecific.status.length; ++i)
 				{
+// @ts-expect-error TS(2339): Property 'status' does not exist on type '{ enable... Remove this comment to see the full error message
 					var diff = Math.abs(val - Number(userspecific.status[i].value));
 
+// @ts-expect-error TS(2339): Property 'status' does not exist on type '{ enable... Remove this comment to see the full error message
 					if(axis == userspecific.status[i].axis && diff <= 0.05 && diff >= -0.05)
 						return 1;
 				}
@@ -1197,6 +1383,7 @@ function checkGamepadButton(btn, gamepad)
 
 //			if(gamepadaxescenter[axis] <= 30)
 //			{
+// @ts-expect-error TS(2304): Cannot find name 'gamepadaxescenter'.
 				var min = (val - gamepadaxescenter[axis]) * 0.55;
 				var max = val + (0.05 * sign);
 				if(max < min)
@@ -1228,6 +1415,7 @@ function checkGamepadButton(btn, gamepad)
 var setaxiscounter =
 {
 	axis: 0, value: 0 , counter: 0,
+// @ts-expect-error TS(7006): Parameter 'axis' implicitly has an 'any' type.
 	set: function(axis, value)
 	{
 		this.axis = axis; this.value = value; this.counter = 1; addClassNameById("assignbuttontooltip", "tooltiptextholdaxis");
@@ -1277,6 +1465,7 @@ function updateStatus()
 				for(i = 0; i < axeslen; ++i)
 				{
 					var val = gamepad.axes[i];
+// @ts-expect-error TS(2304): Cannot find name 'gamepadaxescenter'.
 					if(val >= gamepadaxescenter[i] + 0.30 || val <= gamepadaxescenter[i] - 0.30)
 					{
 						axiscenter = false;
@@ -1325,6 +1514,7 @@ function updateStatus()
 
 		if(userspecific.enable)
 		{
+// @ts-expect-error TS(2339): Property 'status' does not exist on type '{ enable... Remove this comment to see the full error message
 			userspecific.status = [];
 
 			var tilted = false;
@@ -1337,6 +1527,7 @@ function updateStatus()
 				{
 					stickclass = "stick " + sticknames[0] + " " + sticknames[2];
 					status[0] = 1; status[2] = 1;
+// @ts-expect-error TS(2339): Property 'status' does not exist on type '{ enable... Remove this comment to see the full error message
 					userspecific.status.push(userspecific.u, userspecific.l);
 				}
 				tilted = true;
@@ -1349,6 +1540,7 @@ function updateStatus()
 				{
 					stickclass = "stick " + sticknames[1] + " " + sticknames[2];
 					status[1] = 1; status[2] = 1;
+// @ts-expect-error TS(2339): Property 'status' does not exist on type '{ enable... Remove this comment to see the full error message
 					userspecific.status.push(userspecific.d, userspecific.l);
 				}
 				tilted = true;
@@ -1361,6 +1553,7 @@ function updateStatus()
 				{
 					stickclass = "stick " + sticknames[0] + " " + sticknames[3];
 					status[0] = 1; status[3] = 1;
+// @ts-expect-error TS(2339): Property 'status' does not exist on type '{ enable... Remove this comment to see the full error message
 					userspecific.status.push(userspecific.u, userspecific.r);
 				}
 				tilted = true;
@@ -1373,6 +1566,7 @@ function updateStatus()
 				{
 					stickclass = "stick " + sticknames[1] + " " + sticknames[3];
 					status[1] = 1; status[3] = 1;
+// @ts-expect-error TS(2339): Property 'status' does not exist on type '{ enable... Remove this comment to see the full error message
 					userspecific.status.push(userspecific.d, userspecific.r);
 				}
 				tilted = true;
@@ -1384,24 +1578,28 @@ function updateStatus()
 				{
 					stickclass += " " + sticknames[0];
 					status[0] = 1;
+// @ts-expect-error TS(2339): Property 'status' does not exist on type '{ enable... Remove this comment to see the full error message
 					userspecific.status.push(userspecific.u);
 				}
 				if(status[1] === 0 && checkUserSpecificStickTilted(userspecific.d, gamepad) > 0)
 				{
 					stickclass += " " + sticknames[1];
 					status[1] = 1;
+// @ts-expect-error TS(2339): Property 'status' does not exist on type '{ enable... Remove this comment to see the full error message
 					userspecific.status.push(userspecific.d);
 				}
 				if(status[2] === 0 && checkUserSpecificStickTilted(userspecific.l, gamepad) > 0)
 				{
 					stickclass += " " + sticknames[2];
 					status[2] = 1;
+// @ts-expect-error TS(2339): Property 'status' does not exist on type '{ enable... Remove this comment to see the full error message
 					userspecific.status.push(userspecific.l);
 				}
 				if(status[3] === 0 && checkUserSpecificStickTilted(userspecific.r, gamepad) > 0)
 				{
 					stickclass += " " + sticknames[3];
 					status[3] = 1;
+// @ts-expect-error TS(2339): Property 'status' does not exist on type '{ enable... Remove this comment to see the full error message
 					userspecific.status.push(userspecific.r);
 				}
 			}
@@ -1411,24 +1609,28 @@ function updateStatus()
 				{
 					stickclass += " " + sticknames[0];
 					status[0] = 1;
+// @ts-expect-error TS(2339): Property 'status' does not exist on type '{ enable... Remove this comment to see the full error message
 					userspecific.status.push(userspecific.u);
 				}
 				if(checkUserSpecificStick(userspecific.d, userspecific.n, gamepad) > 0)
 				{
 					stickclass += " " + sticknames[1];
 					status[1] = 1;
+// @ts-expect-error TS(2339): Property 'status' does not exist on type '{ enable... Remove this comment to see the full error message
 					userspecific.status.push(userspecific.d);
 				}
 				if(checkUserSpecificStick(userspecific.l, userspecific.n, gamepad) > 0)
 				{
 					stickclass += " " + sticknames[2];
 					status[2] = 1;
+// @ts-expect-error TS(2339): Property 'status' does not exist on type '{ enable... Remove this comment to see the full error message
 					userspecific.status.push(userspecific.l);
 				}
 				if(checkUserSpecificStick(userspecific.r, userspecific.n, gamepad) > 0)
 				{
 					stickclass += " " + sticknames[3];
 					status[3] = 1;
+// @ts-expect-error TS(2339): Property 'status' does not exist on type '{ enable... Remove this comment to see the full error message
 					userspecific.status.push(userspecific.r);
 				}
 			}
@@ -1449,8 +1651,10 @@ function updateStatus()
 		setClassName(getStickElement(gamepadid), stickclass);
 
 		// buttons
+// @ts-expect-error TS(2304): Cannot find name 'activelayout'.
 		var istekken = (activelayout.inputhistorymode.toggle && activelayout.inputhistorymode.game === "tekken");
 
+// @ts-expect-error TS(2304): Cannot find name 'activelayout'.
 		for(i = 0; i < activelayout.totalbuttonshow; i++)
 		{
 			var btnstatus = checkGamepadButton(custombutton[i], gamepad);
@@ -1475,10 +1679,12 @@ function updateStatus()
 		}
 
 		// input history
+// @ts-expect-error TS(2304): Cannot find name 'activelayout'.
 		if(activelayout.inputhistorymode.toggle)
 		{
 			if(statuschanged && inputlist.length > 0)
 			{
+// @ts-expect-error TS(7005): Variable 'inputlist' implicitly has an 'any[]' typ... Remove this comment to see the full error message
 				input = inputlist.concat(input);
 				input.sort();
 			}
@@ -1520,14 +1726,17 @@ function updateStatus()
 			}
 		}
 
+// @ts-expect-error TS(2304): Cannot find name 'requestAnimFrame'.
 		requestAnimFrame(updateStatus);
 	}
 	else
 		resetgamepad();
 }
 
+// @ts-expect-error TS(7006): Parameter 'input' implicitly has an 'any' type.
 function displayInputList(input)
 {
+// @ts-expect-error TS(2304): Cannot find name 'activelayout'.
 	if(activelayout.inputhistorymode.game === "tekken")
 	{
 		displayInputListTekken(input);
@@ -1540,7 +1749,9 @@ function displayInputList(input)
 
 	var parent = document.getElementById("inputlist");
 
+// @ts-expect-error TS(2531): Object is possibly 'null'.
 	while(parent.childElementCount >= activelayout.inputhistorymode.count)
+// @ts-expect-error TS(2531): Object is possibly 'null'.
 		parent.removeChild(parent.lastChild);
 
 	var child = document.createElement("div");
@@ -1561,9 +1772,11 @@ function displayInputList(input)
 		childalign.appendChild(ele);
 	}
 
+// @ts-expect-error TS(2531): Object is possibly 'null'.
 	parent.insertBefore(child, parent.firstChild);
 }
 
+// @ts-expect-error TS(7006): Parameter 'input' implicitly has an 'any' type.
 function displayInputListTekken(input)
 {
 	var child = document.createElement("div");
@@ -1587,14 +1800,17 @@ function displayInputListTekken(input)
 	var b = [];
 	var j;
 	var pressing = 0;
+// @ts-expect-error TS(2304): Cannot find name 'activelayout'.
 	for(i = 0; i < activelayout.totalbuttonshow; i++)
 	{
 		if(buttonstatus[i] === 1)
 		{
 			pressing = i + 1;
 
+// @ts-expect-error TS(2304): Cannot find name 'activelayout'.
 			if(activelayout.inputhistorymode.btnmapping.length > i && activelayout.inputhistorymode.btnmapping[i] !== "0")
 			{
+// @ts-expect-error TS(2304): Cannot find name 'activelayout'.
 				b = activelayout.inputhistorymode.btnmapping[i].split("+");
 				for(j = 0; j < b.length; j++)
 				{
@@ -1604,15 +1820,20 @@ function displayInputListTekken(input)
 		}
 	}
 
+// @ts-expect-error TS(2403): Subsequent variable declarations must have the sam... Remove this comment to see the full error message
 	var ele = document.getElementById("inputhistorytekkenbtn");
 	if(pressing)
 	{
 		addClassName(ele, "pressing");
 
+// @ts-expect-error TS(2322): Type 'string' is not assignable to type 'number'.
 		pressing = pressing.toString();
+// @ts-expect-error TS(2531): Object is possibly 'null'.
 		if(ele.value !== pressing)
 		{
+// @ts-expect-error TS(2531): Object is possibly 'null'.
 			ele.value = pressing;
+// @ts-expect-error TS(2531): Object is possibly 'null'.
 			ele.onchange();
 		}
 	}
@@ -1661,28 +1882,37 @@ function displayInputListTekken(input)
 
 	var parent = document.getElementById("inputlist");
 
+// @ts-expect-error TS(2531): Object is possibly 'null'.
 	while(parent.childElementCount >= activelayout.inputhistorymode.count)
+// @ts-expect-error TS(2531): Object is possibly 'null'.
 		parent.removeChild(parent.lastChild);
 
+// @ts-expect-error TS(2531): Object is possibly 'null'.
 	parent.insertBefore(child, parent.firstChild);
 }
 
+// @ts-expect-error TS(7006): Parameter 'id' implicitly has an 'any' type.
 function enableStyle(id, enable)
 {
 	var style = document.getElementById(id);
 	if(style !== null)
+// @ts-expect-error TS(2339): Property 'disabled' does not exist on type 'HTMLEl... Remove this comment to see the full error message
 		style.disabled = !enable;
 }
 
+// @ts-expect-error TS(7006): Parameter 'enable' implicitly has an 'any' type.
 function enableCustomLayout(enable)
 {
+// @ts-expect-error TS(2304): Cannot find name 'activelayout'.
 	activelayout = enable ? customlayout : defaultlayout;
 
 	toggleClassNameById('customlayoutdropdown', 'dropdownopen', enable);
 	toggleClassNameById('container', 'customlayout', enable);
 //	showElementById('customlayoutfield', enable);
 
+// @ts-expect-error TS(2304): Cannot find name 'activelayout'.
 	createButtons(activelayout.totalbuttonshow);
+// @ts-expect-error TS(2304): Cannot find name 'activelayout'.
 	showElement(getStickAreaElement(0), activelayout.showstick);
 
 	enableStyle("background-style", enable);
@@ -1706,11 +1936,14 @@ function removeStickStyle()
 	{
 		var name = ".stick-area";
 
+// @ts-expect-error TS(2339): Property 'sheet' does not exist on type 'HTMLEleme... Remove this comment to see the full error message
 		var len = style.sheet.cssRules.length;
 		for(var i = 0, j = 0; i < len; ++i)
 		{
+// @ts-expect-error TS(2339): Property 'sheet' does not exist on type 'HTMLEleme... Remove this comment to see the full error message
 			if(style.sheet.cssRules[i].selectorText === name)
 			{
+// @ts-expect-error TS(2339): Property 'sheet' does not exist on type 'HTMLEleme... Remove this comment to see the full error message
 				style.sheet.deleteRule(i);
 				break;
 			}
@@ -1732,11 +1965,14 @@ function setStickStyle()
 	var name = ".stick-area";
 	var val = customlayout.stick;
 
+// @ts-expect-error TS(2339): Property 'sheet' does not exist on type 'HTMLEleme... Remove this comment to see the full error message
 	var len = style.sheet.cssRules.length;
 	for(var i = 0, j = 0; i < len; ++i)
 	{
+// @ts-expect-error TS(2339): Property 'sheet' does not exist on type 'HTMLEleme... Remove this comment to see the full error message
 		if(style.sheet.cssRules[i].selectorText === name)
 		{
+// @ts-expect-error TS(2339): Property 'sheet' does not exist on type 'HTMLEleme... Remove this comment to see the full error message
 			style.sheet.deleteRule(i);
 			break;
 		}
@@ -1747,9 +1983,11 @@ function setStickStyle()
 	var w = (val.w === "") ? "1" : val.w / 100;
 	var h = (val.h === "") ? "1" : val.h / 100;
 
+// @ts-expect-error TS(2339): Property 'sheet' does not exist on type 'HTMLEleme... Remove this comment to see the full error message
 	style.sheet.insertRule(name + " {" + l + t + "transform:translate(-50%,-50%) scale(" + w + "," + h + ");}", 0);
 }
 
+// @ts-expect-error TS(7006): Parameter 'btn' implicitly has an 'any' type.
 function removeButtonStyle(btn)
 {
 	var style = document.getElementById("button-style");
@@ -1773,12 +2011,15 @@ function removeButtonStyle(btn)
 		namer += name;
 		namep += name;
 
+// @ts-expect-error TS(2339): Property 'sheet' does not exist on type 'HTMLEleme... Remove this comment to see the full error message
 		var len = style.sheet.cssRules.length;
 		for(var i = 0, j = 0; i < len; ++i)
 		{
+// @ts-expect-error TS(2339): Property 'sheet' does not exist on type 'HTMLEleme... Remove this comment to see the full error message
 			var text = style.sheet.cssRules[i].selectorText;
 			if(text === name || text === namer || text === namep)
 			{
+// @ts-expect-error TS(2339): Property 'sheet' does not exist on type 'HTMLEleme... Remove this comment to see the full error message
 				style.sheet.deleteRule(i);
 				--len;
 				if(++j > 3)
@@ -1795,6 +2036,7 @@ function removeAllButtonStyle()
 		document.head.removeChild(style);
 }
 
+// @ts-expect-error TS(7006): Parameter 'btn' implicitly has an 'any' type.
 function setButtonStyle(btn)
 {
 	var styleid = "button-style";
@@ -1826,12 +2068,15 @@ function setButtonStyle(btn)
 	namer += name;
 	namep += name;
 
+// @ts-expect-error TS(2339): Property 'sheet' does not exist on type 'HTMLEleme... Remove this comment to see the full error message
 	var len = style.sheet.cssRules.length;
 	for(var i = 0, j = 0; i < len;)
 	{
+// @ts-expect-error TS(2339): Property 'sheet' does not exist on type 'HTMLEleme... Remove this comment to see the full error message
 		var text = style.sheet.cssRules[i].selectorText;
 		if(text === name || text === namer || text === namep)
 		{
+// @ts-expect-error TS(2339): Property 'sheet' does not exist on type 'HTMLEleme... Remove this comment to see the full error message
 			style.sheet.deleteRule(i);
 			len--;
 			if(++j >= 3)
@@ -1843,32 +2088,49 @@ function setButtonStyle(btn)
 		}
 	}
 
+// @ts-expect-error TS(2339): Property 'x' does not exist on type '{}'.
 	var l = (val.x === "") ? "" : "left:" + val.x + "px" + ";";
+// @ts-expect-error TS(2339): Property 'y' does not exist on type '{}'.
 	var t = (val.y === "") ? "" : "top:" + val.y + "px" + ";";
+// @ts-expect-error TS(2339): Property 'w' does not exist on type '{}'.
 	var w = (val.w === "") ? "" : "width:" + val.w + "px" + ";";
+// @ts-expect-error TS(2339): Property 'h' does not exist on type '{}'.
 	var h = (val.h === "") ? "" : "height:" + val.h + "px" + ";";
+// @ts-expect-error TS(2339): Property 'img' does not exist on type '{}'.
 	var img = (val.img === "") ? "" : "background-image:url(\"layout/" + customlayout.name + "/" + val.img + "\")" + ";";
 
+// @ts-expect-error TS(2339): Property 'xp' does not exist on type '{}'.
 	var lp = (val.xp === "") ? "" : "left:" + val.xp + "px" + ";";
+// @ts-expect-error TS(2339): Property 'yp' does not exist on type '{}'.
 	var tp = (val.yp === "") ? "" : "top:" + val.yp + "px" + ";";
+// @ts-expect-error TS(2339): Property 'wp' does not exist on type '{}'.
 	var wp = (val.wp === "") ? "" : "width:" + val.wp + "px" + ";";
+// @ts-expect-error TS(2339): Property 'hp' does not exist on type '{}'.
 	var hp = (val.hp === "") ? "" : "height:" + val.hp + "px" + ";";
+// @ts-expect-error TS(2339): Property 'imgp' does not exist on type '{}'.
 	var imgp = (val.imgp === "") ? "" : "background-image:url(\"layout/" + customlayout.name + "/" + val.imgp + "\")" + ";";
 
 	if(btn === -1)
 	{
+// @ts-expect-error TS(2339): Property 'img' does not exist on type '{}'.
 		if(!val.img) img = "background-image:none;";
+// @ts-expect-error TS(2339): Property 'imgp' does not exist on type '{}'.
 		if(!val.imgp) img = "background-image:none;";
 
+// @ts-expect-error TS(2339): Property 'img' does not exist on type '{}'.
 		toggleClassNameById("button-area", "no-img", !val.img);
 	}
 	else
 	{
+// @ts-expect-error TS(2339): Property 'img' does not exist on type '{}'.
 		toggleClassNameById("button" + btn, "no-img", !val.img);
 	}
 
+// @ts-expect-error TS(2339): Property 'sheet' does not exist on type 'HTMLEleme... Remove this comment to see the full error message
 	style.sheet.insertRule(name + " {" + l + t + w + h + "}", i);
+// @ts-expect-error TS(2339): Property 'sheet' does not exist on type 'HTMLEleme... Remove this comment to see the full error message
 	style.sheet.insertRule(namer + " {" + img + "}", i + 1);
+// @ts-expect-error TS(2339): Property 'sheet' does not exist on type 'HTMLEleme... Remove this comment to see the full error message
 	style.sheet.insertRule(namep + " {" + lp + tp + wp + hp + imgp + "}", i + 2);
 }
 
@@ -1902,12 +2164,14 @@ function setBackgroundStyle() {
 	style.innerHTML = css;
 }
 
+// @ts-expect-error TS(7006): Parameter 'str' implicitly has an 'any' type.
 function getStringBetween(str, begin, end)
 {
 	var res = str.match(RegExp(begin + "(.*?)" + end, "i"));
 	return (res !== null) ? res[1]: "";
 }
 
+// @ts-expect-error TS(7006): Parameter 'btn' implicitly has an 'any' type.
 function getButtonStyleValue(btn)
 {
 	var val={};
@@ -1915,39 +2179,52 @@ function getButtonStyleValue(btn)
 	ele.className = "hide button" + ((btn < 0) ? "" : btn);
 	ele.style.display = "none";
 	var parent = document.getElementById("customlayout");
+// @ts-expect-error TS(2531): Object is possibly 'null'.
 	parent.appendChild(ele);
 
 	var style = window.getComputedStyle(ele);
 
 	var str = style.left.match(/\d+/);
+// @ts-expect-error TS(2339): Property 'x' does not exist on type '{}'.
 	val.x = (str!==null) ? str : "";
 	str = style.top.match(/\d+/);
+// @ts-expect-error TS(2339): Property 'y' does not exist on type '{}'.
 	val.y = (str!==null) ? str : "";
 	str = style.width.match(/\d+/);
+// @ts-expect-error TS(2339): Property 'w' does not exist on type '{}'.
 	val.w = (str!==null) ? str : "";
 	str = style.height.match(/\d+/);
+// @ts-expect-error TS(2339): Property 'h' does not exist on type '{}'.
 	val.h = (str!==null) ? str : "";
 	str = getStringBetween(style.backgroundImage, "url\\(\"", "\"");
+// @ts-expect-error TS(2339): Property 'img' does not exist on type '{}'.
 	val.img = str.substring(str.lastIndexOf("/") + 1);
 
 	ele.className += " button-pressed";
 	style = window.getComputedStyle(ele);
 
 	str = style.left.match(/\d+/);
+// @ts-expect-error TS(2339): Property 'xp' does not exist on type '{}'.
 	val.xp = (str!==null) ? str : "";
 	str = style.top.match(/\d+/);
+// @ts-expect-error TS(2339): Property 'yp' does not exist on type '{}'.
 	val.yp = (str!==null) ? str : "";
 	str = style.width.match(/\d+/);
+// @ts-expect-error TS(2339): Property 'wp' does not exist on type '{}'.
 	val.wp = (str!==null) ? str : "";
 	str = style.height.match(/\d+/);
+// @ts-expect-error TS(2339): Property 'hp' does not exist on type '{}'.
 	val.hp = (str!==null) ? str : "";
 	str = getStringBetween(style.backgroundImage, "url\\(\"", "\"");
+// @ts-expect-error TS(2339): Property 'imgp' does not exist on type '{}'.
 	val.imgp = str.substring(str.lastIndexOf("/") + 1);
 
+// @ts-expect-error TS(2531): Object is possibly 'null'.
 	parent.removeChild(ele);
 	return val;
 }
 
+// @ts-expect-error TS(7006): Parameter 'e' implicitly has an 'any' type.
 function checkInputNumber(e)
 {
 	if(e !== "")
@@ -1963,6 +2240,7 @@ function checkInputNumber(e)
 	}
 }
 
+// @ts-expect-error TS(7006): Parameter 'e' implicitly has an 'any' type.
 function checkInputNumber2(e)
 {
 	if(e.value === "")
@@ -1971,6 +2249,7 @@ function checkInputNumber2(e)
 		checkInputNumber(e);
 }
 
+// @ts-expect-error TS(7006): Parameter 'e' implicitly has an 'any' type.
 function formatInputNumber2(e)
 {
 	var x = e.value;
@@ -1995,6 +2274,7 @@ function formatInputNumber2(e)
 	e.beforevalue = e.value;
 }
 
+// @ts-expect-error TS(7006): Parameter 'e' implicitly has an 'any' type.
 function formatInputNumber(e)
 {
 	var x = e.value;
@@ -2028,6 +2308,7 @@ function formatInputNumber(e)
 function setBackgroundValue()
 {
 	var val = {
+// @ts-expect-error TS(2531): Object is possibly 'null'.
 		show: document.getElementById("custombackgroundshow").checked,
 		image : getValueById("custombackgroundimg"),
 		w : getValueById("custombackgroundw"),
@@ -2044,6 +2325,7 @@ function getBackgroundValue()
 {
 	if(!customlayout.background) return;
 
+// @ts-expect-error TS(2531): Object is possibly 'null'.
 	document.getElementById("custombackgroundshow").checked = customlayout.background.show;
 	setValueById("custombackgroundimg", customlayout.background.image);
 	setValueById("custombackgroundw", customlayout.background.w);
@@ -2052,6 +2334,7 @@ function getBackgroundValue()
 
 function enableBackgroundValue()
 {
+// @ts-expect-error TS(2531): Object is possibly 'null'.
 	var enable = document.getElementById("custombackgroundshow").checked;
 	toggleClassNameById("inputfilenamepathbackgroundimg", "disabled", !enable);
 	enableById("custombackgroundimg", enable);
@@ -2100,6 +2383,7 @@ function setButtonValue()
 	};
 
 	var btn = -1;
+// @ts-expect-error TS(2531): Object is possibly 'null'.
 	if(document.getElementById("custombuttondefault").checked)
 	{
 		customlayout.defaultbuttons = val;
@@ -2114,6 +2398,7 @@ function setButtonValue()
 
 var oldsetbuttonvalue = -1;
 
+// @ts-expect-error TS(7006): Parameter 'btn' implicitly has an 'any' type.
 function getButtonValue(btn)
 {
 	var enable = (btn !== "");
@@ -2184,14 +2469,17 @@ function getButtonValue(btn)
 	}
 }
 
+// @ts-expect-error TS(7006): Parameter 'classname' implicitly has an 'any' type... Remove this comment to see the full error message
 function getCSSValue(classname, prop)
 {
 	var css = document.createElement("div");
 	css.className = classname;
 	css.style.display = "none";
 	var parent = document.getElementById("customlayout");
+// @ts-expect-error TS(2531): Object is possibly 'null'.
 	parent.appendChild(css);
 	var vals = window.getComputedStyle(css).getPropertyValue(prop).replace(/(^\"|\"$)/g, "");
+// @ts-expect-error TS(2531): Object is possibly 'null'.
 	parent.removeChild(css);
 
 	return vals;
@@ -2203,8 +2491,10 @@ function cssLoaded()
 	css.id = "customLayoutValue";
 	css.style.display = "none";
 	var parent = document.getElementById("customlayout");
+// @ts-expect-error TS(2531): Object is possibly 'null'.
 	parent.appendChild(css);
 	var vals = window.getComputedStyle(css).getPropertyValue("content");
+// @ts-expect-error TS(2531): Object is possibly 'null'.
 	parent.removeChild(css);
 
 	vals = vals.replace(/(^\"|\"$)/g, "");
@@ -2222,6 +2512,7 @@ function cssLoaded()
 
 function saveCSSToFile()
 {
+// @ts-expect-error TS(2531): Object is possibly 'null'.
 	var filename = document.getElementById("customlayoutfilename").value;
 	if(filename === "")
 		filename = "custom.css";
@@ -2239,6 +2530,7 @@ function saveCSSToFile()
 
 var mouseevent = {target: null, id: 0, offsetx: 0, offsety: 0, pagex: 0, pagey:0};
 
+// @ts-expect-error TS(7006): Parameter 'e' implicitly has an 'any' type.
 function mousedown(e)
 {
 	if(mouseevent.target !== null)
@@ -2259,6 +2551,7 @@ function mousedown(e)
 	else
 		return;
 
+// @ts-expect-error TS(2531): Object is possibly 'null'.
 	if(document.getElementById("customlayouttoggle").checked)
 	{
 		document.addEventListener("mousemove", mousemove);
@@ -2293,6 +2586,7 @@ function mousedown(e)
 
 	document.addEventListener("mouseup", mouseup);
 
+// @ts-expect-error TS(2531): Object is possibly 'null'.
 	document.getElementById("inputareafield").disabled = true;
 
 	e.preventDefault();
@@ -2300,6 +2594,7 @@ function mousedown(e)
 	return;
 }
 
+// @ts-expect-error TS(7006): Parameter 'e' implicitly has an 'any' type.
 function mousemove(e)
 {
 	if(mouseevent.target === null)
@@ -2310,6 +2605,7 @@ function mousemove(e)
 
 	if(mouseevent.id < 1000) // button
 	{
+// @ts-expect-error TS(2531): Object is possibly 'null'.
 		if(document.getElementById("custombuttonn").valueAsNumber === mouseevent.id + 1)
 		{
 			setValueById("custombuttonx", x);
@@ -2337,6 +2633,7 @@ function mousemove(e)
 		return;
 }
 
+// @ts-expect-error TS(7006): Parameter 'e' implicitly has an 'any' type.
 function mouseup(e)
 {
 	if(mouseevent.target === null)
@@ -2346,6 +2643,7 @@ function mouseup(e)
 	document.removeEventListener("mouseup", mouseup);
 
 	var clicked = false;
+// @ts-expect-error TS(2531): Object is possibly 'null'.
 	if(document.getElementById("customlayouttoggle").checked)
 	{
 		if(e.pageX === mouseevent.pagex && e.pageY === mouseevent.pagey)
@@ -2367,11 +2665,13 @@ function mouseup(e)
 			buttonSetup(mouseevent);
 		else if(mouseevent.id === 1000)
 		{
+// @ts-expect-error TS(2339): Property 'className' does not exist on type 'never... Remove this comment to see the full error message
 			if(mouseevent.target.className.search("stick-block") >= 0)
 				stickSetup(mouseevent);
 		}
 	}
 
+// @ts-expect-error TS(2531): Object is possibly 'null'.
 	document.getElementById("inputareafield").disabled = false;
 
 	removeClassName(mouseevent.target, "mousemove");
@@ -2382,17 +2682,23 @@ function mouseup(e)
 	mouseevent.target = null;
 }
 
+// @ts-expect-error TS(7006): Parameter 'id' implicitly has an 'any' type.
 function actionCheckById(id, check)
 {
 	var ele = document.getElementById(id);
+// @ts-expect-error TS(2531): Object is possibly 'null'.
 	ele.checked = check;
+// @ts-expect-error TS(2531): Object is possibly 'null'.
 	ele.onchange();
 }
 
+// @ts-expect-error TS(7006): Parameter 'id' implicitly has an 'any' type.
 function actionSetValueById(id, value)
 {
 	var ele = document.getElementById(id);
+// @ts-expect-error TS(2531): Object is possibly 'null'.
 	ele.value = value;
+// @ts-expect-error TS(2531): Object is possibly 'null'.
 	ele.oninput();
 }
 
@@ -2401,6 +2707,7 @@ function actionSetValueById(id, value)
 
 function resetLayout()
 {
+// @ts-expect-error TS(7009): 'new' expression, whose target lacks a construct s... Remove this comment to see the full error message
 	customlayout = new defaultLayout();
 }
 
@@ -2423,6 +2730,7 @@ var setbutton = -1;
 var activegamepad = -1;
 var customize = 0;
 
+// @ts-expect-error TS(7034): Variable 'inputlist' implicitly has type 'any[]' i... Remove this comment to see the full error message
 var inputlist = [];
 var laststatus = {btns: [0,0,0,0], arrow: 0};
 
@@ -2445,104 +2753,157 @@ var userspecific = {
 	dr : { axis : "", value : ""}
 };
 
+// @ts-expect-error TS(7006): Parameter 'arg' implicitly has an 'any' type.
 function defaultArg(arg, value)
 {
 	return (typeof arg == 'undefined') ? value : arg;
 }
 
+// @ts-expect-error TS(7006): Parameter 'layout' implicitly has an 'any' type.
 function copyLayout(layout)
 {
+// @ts-expect-error TS(2683): 'this' implicitly has type 'any' because it does n... Remove this comment to see the full error message
 	this.version = defaultArg(layout.version, "");
+// @ts-expect-error TS(2683): 'this' implicitly has type 'any' because it does n... Remove this comment to see the full error message
 	if(this.version === "")
 		return null;
 
+// @ts-expect-error TS(2683): 'this' implicitly has type 'any' because it does n... Remove this comment to see the full error message
 	this.name = defaultArg(layout.name, "");
 
+// @ts-expect-error TS(2683): 'this' implicitly has type 'any' because it does n... Remove this comment to see the full error message
 	this.inputhistorymode = new inputhistorymode(defaultArg(layout.inputhistorymode, {}));
 
+// @ts-expect-error TS(2683): 'this' implicitly has type 'any' because it does n... Remove this comment to see the full error message
 	this.totalbuttonshow = defaultArg(layout.totalbuttonshow, 0);
 
+// @ts-expect-error TS(2683): 'this' implicitly has type 'any' because it does n... Remove this comment to see the full error message
 	this.showstick = defaultArg(layout.showstick, false);
 
+// @ts-expect-error TS(2683): 'this' implicitly has type 'any' because it does n... Remove this comment to see the full error message
 	this.stick = defaultArg(layout.stick, {});
 
+// @ts-expect-error TS(2683): 'this' implicitly has type 'any' because it does n... Remove this comment to see the full error message
 	this.defaultbuttons = new buttonlayout(defaultArg(layout.defaultbuttons, {}));
 
+// @ts-expect-error TS(2683): 'this' implicitly has type 'any' because it does n... Remove this comment to see the full error message
 	this.buttons = [];
 	var len = layout.buttons.length;
 	for(var i = 0; i < len; ++i)
 	{
+// @ts-expect-error TS(2683): 'this' implicitly has type 'any' because it does n... Remove this comment to see the full error message
 		this.buttons.push(new buttonlayout(defaultArg(layout.buttons[i], {})));
 	}
+// @ts-expect-error TS(2403): Subsequent variable declarations must have the sam... Remove this comment to see the full error message
 	for(var i = len; i < totalbuttons; ++i)
+// @ts-expect-error TS(2683): 'this' implicitly has type 'any' because it does n... Remove this comment to see the full error message
 		this.buttons.push(new buttonlayout());
 
 	if(layout.background)
+// @ts-expect-error TS(2683): 'this' implicitly has type 'any' because it does n... Remove this comment to see the full error message
 		this.background = layout.background;
 
+// @ts-expect-error TS(2683): 'this' implicitly has type 'any' because it does n... Remove this comment to see the full error message
 	return this;
 }
 
+// @ts-expect-error TS(7006): Parameter 'input' implicitly has an 'any' type.
 function inputhistorymode(input)
 {
 	input = defaultArg(input, new Object());
+// @ts-expect-error TS(2683): 'this' implicitly has type 'any' because it does n... Remove this comment to see the full error message
 	this.toggle = defaultArg(input.toggle, false);
+// @ts-expect-error TS(2683): 'this' implicitly has type 'any' because it does n... Remove this comment to see the full error message
 	this.direction = defaultArg(input.direction, 0);
+// @ts-expect-error TS(2683): 'this' implicitly has type 'any' because it does n... Remove this comment to see the full error message
 	this.count = defaultArg(input.count, 20);
+// @ts-expect-error TS(2683): 'this' implicitly has type 'any' because it does n... Remove this comment to see the full error message
 	this.game = defaultArg(input.game, "default");
+// @ts-expect-error TS(2683): 'this' implicitly has type 'any' because it does n... Remove this comment to see the full error message
 	this.btnmapping = defaultArg(input.btnmapping, ["1","2","3","4","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0"]);
+// @ts-expect-error TS(2683): 'this' implicitly has type 'any' because it does n... Remove this comment to see the full error message
 	return this;
 }
 
+// @ts-expect-error TS(7006): Parameter 'layout' implicitly has an 'any' type.
 function sticklayout(layout)
 {
 	layout = defaultArg(layout, new Object());
+// @ts-expect-error TS(2683): 'this' implicitly has type 'any' because it does n... Remove this comment to see the full error message
 	this.x = defaultArg(layout.x, "0"); this.y = defaultArg(layout.y, "0"); this.w = defaultArg(layout.w, ""); this.h = defaultArg(layout.h, "");
+// @ts-expect-error TS(2683): 'this' implicitly has type 'any' because it does n... Remove this comment to see the full error message
 	return this;
 }
 
+// @ts-expect-error TS(7006): Parameter 'layout' implicitly has an 'any' type.
 function buttonlayout(layout)
 {
 	layout = defaultArg(layout, new Object());
+// @ts-expect-error TS(2683): 'this' implicitly has type 'any' because it does n... Remove this comment to see the full error message
 	this.x = defaultArg(layout.x, "0"); this.y = defaultArg(layout.y, "0"); this.w = defaultArg(layout.w, ""); this.h = defaultArg(layout.h, ""); this.img = defaultArg(layout.img, "");
+// @ts-expect-error TS(2683): 'this' implicitly has type 'any' because it does n... Remove this comment to see the full error message
 	this.xp = defaultArg(layout.xp, ""); this.yp = defaultArg(layout.yp, ""); this.wp = defaultArg(layout.wp, ""); this.hp = defaultArg(layout.hp, ""); this.imgp = defaultArg(layout.imgp, "");
+// @ts-expect-error TS(2683): 'this' implicitly has type 'any' because it does n... Remove this comment to see the full error message
 	return this;
 }
 
 function defaultLayout() {
 
+// @ts-expect-error TS(2683): 'this' implicitly has type 'any' because it does n... Remove this comment to see the full error message
 	this.version = currentversion;
 
+// @ts-expect-error TS(2683): 'this' implicitly has type 'any' because it does n... Remove this comment to see the full error message
 	this.name = "preset";
 
+// @ts-expect-error TS(2683): 'this' implicitly has type 'any' because it does n... Remove this comment to see the full error message
 	this.inputhistorymode = new inputhistorymode({toggle:false, direction:0, count: 20});
 
+// @ts-expect-error TS(2683): 'this' implicitly has type 'any' because it does n... Remove this comment to see the full error message
 	this.totalbuttonshow = 10;
+// @ts-expect-error TS(2683): 'this' implicitly has type 'any' because it does n... Remove this comment to see the full error message
 	this.showstick = true;
 
+// @ts-expect-error TS(2683): 'this' implicitly has type 'any' because it does n... Remove this comment to see the full error message
 	this.stick = new sticklayout({x:"110", y:"125", w:"100", h:"100"});
 
+// @ts-expect-error TS(2683): 'this' implicitly has type 'any' because it does n... Remove this comment to see the full error message
 	this.defaultbuttons = new buttonlayout({x:"", y:"", w:"60", h:"60", img:"button-released.png", xp:"", yp:"", wp:"", hp:"", imgp:"button-pressed.png"});
+// @ts-expect-error TS(2683): 'this' implicitly has type 'any' because it does n... Remove this comment to see the full error message
 	this.buttons = [
+// @ts-expect-error TS(7009): 'new' expression, whose target lacks a construct s... Remove this comment to see the full error message
 		new buttonlayout({x:"250", y:"115"}),
+// @ts-expect-error TS(7009): 'new' expression, whose target lacks a construct s... Remove this comment to see the full error message
 		new buttonlayout({x:"310", y:"85"}),
+// @ts-expect-error TS(7009): 'new' expression, whose target lacks a construct s... Remove this comment to see the full error message
 		new buttonlayout({x:"375", y:"85"}),
+// @ts-expect-error TS(7009): 'new' expression, whose target lacks a construct s... Remove this comment to see the full error message
 		new buttonlayout({x:"440", y:"85"}),
+// @ts-expect-error TS(7009): 'new' expression, whose target lacks a construct s... Remove this comment to see the full error message
 		new buttonlayout({x:"240", y:"185"}),
+// @ts-expect-error TS(7009): 'new' expression, whose target lacks a construct s... Remove this comment to see the full error message
 		new buttonlayout({x:"300", y:"155"}),
+// @ts-expect-error TS(7009): 'new' expression, whose target lacks a construct s... Remove this comment to see the full error message
 		new buttonlayout({x:"365", y:"155"}),
+// @ts-expect-error TS(7009): 'new' expression, whose target lacks a construct s... Remove this comment to see the full error message
 		new buttonlayout({x:"430", y:"155"}),
+// @ts-expect-error TS(7009): 'new' expression, whose target lacks a construct s... Remove this comment to see the full error message
 		new buttonlayout({x:"390", y:"30", w:"40", h:"40"}),
+// @ts-expect-error TS(7009): 'new' expression, whose target lacks a construct s... Remove this comment to see the full error message
 		new buttonlayout({x:"440", y:"30", w:"40", h:"40"})
 	];
 
+// @ts-expect-error TS(2683): 'this' implicitly has type 'any' because it does n... Remove this comment to see the full error message
 	for(var i = this.buttons.length; i < totalbuttons; ++i)
+// @ts-expect-error TS(2683): 'this' implicitly has type 'any' because it does n... Remove this comment to see the full error message
 		this.buttons.push(new buttonlayout());
 
+// @ts-expect-error TS(2683): 'this' implicitly has type 'any' because it does n... Remove this comment to see the full error message
 	return this;
 };
 
+// @ts-expect-error TS(7009): 'new' expression, whose target lacks a construct s... Remove this comment to see the full error message
 var defaultlayout = new defaultLayout();
+// @ts-expect-error TS(2552): Cannot find name 'activelayout'. Did you mean 'sav... Remove this comment to see the full error message
 var customlayout = activelayout = new defaultLayout();
 var customlayoutenabled = false;
 
@@ -2573,35 +2934,42 @@ function init()
 
 	var player = getParameterByName("p");
 	if(player !== "")
+// @ts-expect-error TS(2322): Type 'number' is not assignable to type 'string'.
 		player = parseInt(player);
 	else
+// @ts-expect-error TS(2322): Type 'number' is not assignable to type 'string'.
 		player = 0;
 
 	var bgopacity = getParameterByName("o");
 	if(bgopacity !== "")
 	{
+// @ts-expect-error TS(2531): Object is possibly 'null'.
 		document.getElementById("bgopacityvalue").value = bgopacity;
 		updateBgOpacity(bgopacity);
 	}
 	else
 	{
+// @ts-expect-error TS(2531): Object is possibly 'null'.
 		document.getElementById("bgopacityvalue").value = "1.0";
 	}
 
 	var scale = getParameterByName("s");
 	if(scale !== "")
 	{
+// @ts-expect-error TS(2531): Object is possibly 'null'.
 		document.getElementById("scalevalue").value = scale;
 		updateScale(scale);
 	}
 	else
 	{
+// @ts-expect-error TS(2531): Object is possibly 'null'.
 		document.getElementById("scalevalue").value = "1.0";
 	}
 
 	var b = getParameterByName("b");
 	if(b !== "")
 	{
+// @ts-expect-error TS(7006): Parameter 'str' implicitly has an 'any' type.
 		var getButtonParameter = function(str, index, obj, len)
 		{
 			var l = str.length;
@@ -2666,7 +3034,9 @@ function init()
 			setElementValueById("userspecificadr", userspecific.dr.axis);
 			setElementValueById("userspecificvdr", userspecific.dr.value);
 
+// @ts-expect-error TS(2531): Object is possibly 'null'.
 			document.getElementById("userspecifictoggle").checked = true;
+// @ts-expect-error TS(2531): Object is possibly 'null'.
 			document.getElementById("userspecifictoggle").onclick();
 		}
 	}
@@ -2678,6 +3048,7 @@ function init()
 		loadJSON("layout/" + layout + "/layout.sav");
 //		loadLayout(new File([""], "layout/" + layout + "/layout.sav"));
 
+// @ts-expect-error TS(2531): Object is possibly 'null'.
 		document.getElementById("customlayoutfilename").value = layout;
 	}
 	getBackgroundValue();
@@ -2704,9 +3075,11 @@ function init()
 	if(customize >= 1)
 	{
 		updateLink();
+// @ts-expect-error TS(2554): Expected 2 arguments, but got 1.
 		showElementById("inputarea");
 
 		if(location.protocol === "file:")
+// @ts-expect-error TS(2554): Expected 2 arguments, but got 1.
 			showElementById("obsbrowserlink");
 
 		// init dropdown elements
@@ -2716,6 +3089,7 @@ function init()
 		var x = document.getElementsByClassName("dropdown");
 		for(i = 0; i < x.length; ++i)
 		{
+// @ts-expect-error TS(2531): Object is possibly 'null'.
 			style.sheet.insertRule("#" + x[i].id + ".dropdownopen{max-height:" + x[i].scrollHeight + "px;}", 0);
 		}
 	}
