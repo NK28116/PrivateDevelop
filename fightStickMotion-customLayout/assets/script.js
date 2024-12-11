@@ -692,6 +692,19 @@ function updateBgOpacity(value)
 	updateLink();
 }
 
+/*************  ✨ Codeium Command ⭐  *************/
+/**
+ * Called when the input history toggle button is changed.
+ *
+ * If the custom layout toggle button is checked, this function will update the
+ * custom layout's input history settings and update the display accordingly.
+ *
+ * If the custom layout toggle button is not checked, this function will disable
+ * the stick button config and hide the input history fieldset.
+ *
+ * @return {undefined}
+ */
+/******  48522022-ea4e-44fc-9b5c-963d5ae6f138  *******/å
 function updateInputHistoryToggle()
 {
 	if(document.getElementById("customlayouttoggle").checked)
@@ -773,6 +786,17 @@ function updateInputHistoryStyleTekken(btns)
 	return ".tekken .inputlistelement.inputlistelement" + btns.join("-") + "{background-image:url('layout/" + customlayout.name + "/btn-" + btns.join("+") + ".png');}";
 }
 
+/*************  ✨ Codeium Command ⭐  *************/
+/**
+ * Called when the value of the input history Tekken button select box is changed.
+ *
+ * If the custom layout toggle button is checked and the input history game is
+ * "tekken", this function will update the custom layout's input history settings
+ * and update the display accordingly.
+ *
+ * @return {undefined}
+ */
+/******  e990c072-e608-40da-b70e-ff384568a542  *******/å
 function updateInputHistoryTekkenBtn()
 {
 	if(customlayout.inputhistorymode.game === "tekken")
@@ -785,6 +809,15 @@ function updateInputHistoryTekkenBtn()
 	}
 }
 
+/**
+ * Called when the value of the input history Tekken button map to field is changed.
+ *
+ * If the custom layout toggle button is checked and the input history game is
+ * "tekken", this function will update the custom layout's input history settings
+ * and update the display accordinglyå.
+ *
+ * @return {undefined}
+ */
 function updateInputHistoryTekkenBtnMapTo()
 {
 	customlayout.inputhistorymode.btnmapping[document.getElementById("inputhistorytekkenbtn").value - 1] = document.getElementById("inputhistorytekkenbtnmapto").value;
