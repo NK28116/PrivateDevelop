@@ -5,6 +5,7 @@ import {DownCounter, Square,Triangle,UpCounter} from "./Button";
 import {CounterApp} from "./Counter";
 import {Rate} from "./Rate";
 import {FormTest3} from "./ActionState";
+import {UseOptimisticDemo} from "./UseOpticalDemo";
 
 function App() {
     return (
@@ -12,10 +13,10 @@ function App() {
         {/* <Square /> */}
         {/*  <Triangle /> */}
         {/* <UpCounter /> */}
-        {/* <DownCounter /> */}
- <CounterApp />
-      <Rate />
-      <FormTest3 />
+        {/* <DownCounter /> <Rate /> */}
+    <CounterApp />
+    <FormTest3 />
+    <UseOptimisticDemo />
     </div>
   );
 }
