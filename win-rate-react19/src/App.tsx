@@ -12,7 +12,7 @@ function App() {
         {/*  <Triangle /> */}
         {/* <UpCounter /> */}
         {/* <DownCounter /> */}
-        {/* <CounterApp /> */}
+ <CounterApp />
       <Rate />
     </div>
   );

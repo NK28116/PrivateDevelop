@@ -20,27 +20,23 @@ export function Rate() {
             <RightUpCounter onRightUp={RightUp} />
             <LeftUpCounter onLeftUp={LeftUp} />
             <CountRate rate={rate} />
-            count1: {count1}, count2: {count2}
+            win: {count1}, lose: {count2},all game: {count1 + count2}
         </div>
     );
 }
-
+function ObjectName() {
+    return<label>相手キャラ: <input type="text" placeholder="これがプレースホルダー"/></label>
+}
 function RightUpCounter({ onRightUp }: { onRightUp: () => void }) {
     return (
-        <button onClick={onRightUp}>+1</button>
-
+        <button onClick={onRightUp}>win:+1</button>
         );
 }
 
 function LeftUpCounter({ onLeftUp }: { onLeftUp: () => void }) {
-    return <button onClick={onLeftUp}>+1</button>;
+    return <button onClick={onLeftUp}>lose:+1</button>;
 }
 
 function CountRate({ rate }: { rate: number }) {
-    return <div>Rate: {rate.toFixed(2)}</div>;
-}
-
-function ObjectName() {
-    return<label>入力欄: <input type="text" placeholder="これがプレースホルダー"/></label>
-
+    return <div>WinRate: {rate.toFixed(2)}</div>;
 }

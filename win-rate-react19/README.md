@@ -1,3 +1,12 @@
+# React 19 の新機能
+
+## [WIP]useFormStatus: Submit Form
+- 送信中という状態を表示する(submitting)
+
+## useActionState: Counter.tsx
+- onClickを使わずにstateを変更できる
+  - React 18はRate.tsx
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
