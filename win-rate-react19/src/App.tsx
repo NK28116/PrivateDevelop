@@ -4,6 +4,7 @@ import './App.css';
 import {DownCounter, Square,Triangle,UpCounter} from "./Button";
 import {CounterApp} from "./Counter";
 import {Rate} from "./Rate";
+import {FormTest3} from "./ActionState";
 
 function App() {
     return (
@@ -14,6 +15,7 @@ function App() {
         {/* <DownCounter /> */}
  <CounterApp />
       <Rate />
+      <FormTest3 />
     </div>
   );
 }
