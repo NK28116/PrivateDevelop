@@ -16,6 +16,8 @@ main
 ## project一覧
 
 - [WIP] 1. {NextjsのApp Router,prisma.schemaの勉強}テンキー表記のコンボから技名のコンボに変換(例”236HP>623LP”を”強波動から弱昇竜”)
+  - これだけ別リポジトリ(numPadToCommand...)
+  - ブランチを作り直す 
 - [WIP] 2. {React 19 を勉強}勝率計算ページ
 - [NotStart] 3. 格ゲーチェッカーのイベントページの情報をiCal形式に変換
   - スクレイピングは１の技名を参照するのに使える？
