@@ -1,3 +1,7 @@
+元ネタ https://obsproject.com/forum/resources/display-fightstick-motions.344/
+似たようなの見つけたって？（https://obsproject.com/forum/resources/display-fightstick-motions.344/）
+ま，勉強のためにやろうぜ
+
 # fightStickMotionの改造
 1. SF6モダンに対応
 2. GGSTに対応
