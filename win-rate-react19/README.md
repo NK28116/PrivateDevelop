@@ -1,11 +1,85 @@
 # React 19 の新機能
 
-## [WIP]useFormStatus: Submit Form
-- 送信中という状態を表示する(submitting)
+## [WIP]useFormStatus: SubmitForm.tsx
+- 直近のフォーム送信に関するステータス
+```jsx
+const { pending, data, method, action } = useFormStatus();
+//引数:必要なし，返数:status Object
+//pending:boolean,送信中であるならばtrue
+//data:<form>が送信中のデータの中身.FromDataインターフェースを実装している
+//method:get or post.<form>がどっちのHTTPメソッドを使っているか
+//action:<form>のpropsであるactionに渡された関数への参照.
+```
+### 使用例
+```tsx
+import React from 'react';
+import { useFormStatus } from 'react-dom';
+
+// FormData を使って送信データを表示するコンポーネント
+function MyFormComponent() {
+  const { pending, data, method, action } = useFormStatus();
+
+  // `data` が FormData 型であることを確認
+  const formData = data instanceof FormData ? data : null;
+
+  return (
+    <div>
+      <form action={action} method={method}>
+        <input type="text" name="query" placeholder="Enter some text" />
+        <button type="submit" disabled={pending}>
+          {pending ? 'Submitting...' : 'Submit'}
+        </button>
+      </form>
+
+      {/* フォーム送信状態 */}
+      <div>
+        {pending && <p>Form is being submitted...</p>}
+        {!pending && formData && (
+          <div>
+            <h3>Form Data:</h3>
+            <pre>
+              {Array.from(formData.entries())
+                .map(([key, value]) => `${key}: ${value}`)
+                .join('\n')}
+            </pre>
+          </div>
+        )}
+      </div>
+
+      {/* 送信方法とアクションの情報 */}
+      <div>
+        <p>Method: {method}</p>
+        <p>Action: {action}</p>
+      </div>
+    </div>
+  );
+}
+
+export default MyFormComponent;
+
+```
 
 ## useActionState: Counter.tsx
 - onClickを使わずにstateを変更できる
   - React 18はRate.tsx
+  - Counter.tsxでReact19
+    - IncrementボタンとDecrementボタンを作ってその合計を表示している
+```tsx
+import { useActionState } from 'react';
+
+function MyComponent(): {state: Type, formAction: () => void} {
+  const [state, formAction] = useActionState(action, init);
+  //state:stateの現在値(初期値，formが送信された後はactionの返り値)
+  //fromAction:<form>のpropsであるactionに渡す新しいactio
+  //action:渡すaction関数
+  //init:stateの初期値
+  return (
+    <form action={formAction}>
+      {/* ... */}
+    </form>
+  );
+}
+```
 
 # Getting Started with Create React App
 
