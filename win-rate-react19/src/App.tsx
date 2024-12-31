@@ -1,31 +1,26 @@
 import React from 'react';
-import useRef from 'react';
-import logo from './logo.svg';
 import './App.css';
-import {DownCounter, Square,Triangle,UpCounter} from "./Button";
 import {CounterApp} from "./Counter";
-import {Rate} from "./Rate";
 import {FormTest3} from "./ActionState";
 import {UseOptimisticDemo} from "./UseOpticalDemo";
 import {SubmitButton,SubmitInput} from "./SubmitForm";
+//import { CaluculateRateAndWLBotton} from "./WinRate/CaluculateRateAndWLBotton";
+import {WinRate} from "./WinRate/WinRate";
 
 function App() {
     return (
         <div className="App">
-        {/* <Square /> */}
-        {/*  <Triangle /> */}
-        {/* <UpCounter /> */}
-        {/* <DownCounter /> <Rate /> */}
-    <CounterApp />
-    <br/>
-    <SubmitButton />
-    <SubmitInput />
+            <WinRate />
+            {/*<CaluculateRateAndWLBotton />
+            <UseOptimisticDemo />
+             <CounterApp />
+              <FormTest3 />
+               <SubmitButton />
+            */}
 
-    <FormTest3 />
-    <br/>
-    <UseOptimisticDemo />
-    </div>
-  );
+            <SubmitInput />
+        </div>
+    );
 }
 
 export default App;
