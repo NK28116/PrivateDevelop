@@ -1,15 +1,12 @@
 import { useOptimistic, useState, useRef } from "react";
 import { useFormStatus } from "react-dom";
 
-async function submitForm(query:FormData) {
-    await new Promise((res) => setTimeout(res, 1000));
-}
-
 ///placeHolder付き
 function SubmitNamePlaceHolder() {
     const { pending, data } = useFormStatus();
     return (
         <div>
+            <h3>{pending ? "Submitting..." : "Submit"}</h3>
             <p>{data ? `Submitting ${data?.get("name")}...` : ""}</p>
         </div>
     );
