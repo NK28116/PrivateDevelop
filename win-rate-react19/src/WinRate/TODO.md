@@ -9,52 +9,66 @@ src-App
 - スプレッドシートでいいことをreact19の勉強のために作成する
 - データアセットとかあればいいよね
 
+### useOptimistic
+https://qiita.com/Yasushi-Mo/items/abaddd44b92ba007e0c7
+- 登録後の状態を見せることができる
+  - hogeを登録したときに登録中であることを示せる
+  - この時のスタイルを変えるのにuseFromStatusを使うことができてisPending=trueのときはグレーアウトさせてtrue-> falseになったら元のスタイルにあわせる，みたいなことができる
+
+公式のuseOptimistic
 ```tsx
-import React, { useState, ChangeEvent, FormEvent } from 'react';
+import { useOptimistic, useState, useRef } from "react";
 
-const App: React.FC = () => {
-  // 入力されたデータを保存するためのstate
-  const [inputData, setInputData] = useState<string>(''); // 入力フィールドの状態
-  const [items, setItems] = useState<string[]>([]); // 入力されたアイテムのリスト
+async function deliverMessage(message:FormData) {
+  await new Promise((res) => setTimeout(res, 1000));
+  return message;
+}
 
-  // フォームが送信されたときの処理
-  const handleSubmit = (e: FormEvent) => {
-    e.preventDefault(); // ページリロードを防ぐ
-    if (inputData.trim()) {
-      setItems([...items, inputData]); // 入力されたデータをリストに追加
-      setInputData(''); // 入力フィールドをクリア
-    }
-  };
-
-  // 入力内容の変更を管理するための関数
-  const handleInputChange = (e: ChangeEvent<HTMLInputElement>) => {
-    setInputData(e.target.value);
-  };
-
+function Thread({ messages, sendMessage }) {
+  const formRef = useRef();
+  const [optimisticMessages, addOptimisticMessage] = useOptimistic(
+    messages,
+    (state, newMessage) => [
+      ...state,
+      {
+        text: newMessage,
+        sending: true
+      }
+    ]
+  );
+  async function formAction(formData) {
+    addOptimisticMessage(formData.get("message"));
+    formRef.current.reset();
+    await sendMessage(formData);
+  }
+  
   return (
-    <div>
-      <h1>情報一覧</h1>
-
-      {/* 入力フォーム */}
-      <form onSubmit={handleSubmit}>
-        <input
-          type="text"
-          value={inputData}
-          onChange={handleInputChange}
-          placeholder="情報を入力してください"
-        />
-        <button type="submit">追加</button>
+    <>
+      {optimisticMessages.map((message, index) => (
+        <div key={index}>
+          {message.text}
+          {!!message.sending && <small> (Sending...)</small>}
+        </div>
+      ))}
+      <form action={formAction} ref={formRef}>
+        <input type="text" name="message" placeholder="Hello!" />
+        <button type="submit">Send</button>
       </form>
-
-      {/* 一覧表示 */}
-      <ul>
-        {items.map((item, index) => (
-          <li key={index}>{item}</li>
-        ))}
-      </ul>
-    </div>
+    </>
   );
 }
 
-export default App;
+export default function App() {
+  const [messages, setMessages] = useState([
+    { text: "Hello there!", sending: false, key: 1 }
+  ]);
+  
+  async function sendMessage(formData) {
+    const sentMessage = await deliverMessage(formData.get("message"));
+    setMessages((messages) => [...messages, { text: sentMessage }]);
+  }
+  
+  return <Thread messages={messages} sendMessage={sendMessage} />;
+}
+
 ```

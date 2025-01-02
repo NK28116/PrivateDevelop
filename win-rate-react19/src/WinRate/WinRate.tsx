@@ -19,7 +19,7 @@ const Counter = () => {
         <>
         <WinIncDecButton setTotalWinState={setTotalWinState} />
         <LoseIncDecButton setTotalLoseState={setTotalLoseState} />
-        <div>WinRate: {totalWinRate}</div>
+        <div>WinRate: {totalWinRate.toFixed(2)}</div>
         <div>Games: {allGames}</div>
         </>
     )

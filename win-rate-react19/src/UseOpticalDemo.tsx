@@ -12,8 +12,10 @@ export const UseOptimisticDemo = () => {
   const submitAction = async (formData: FormData) => {
     const newName = formData.get("name") as string;
     setOptimisticName(newName);
+    console.log(newName)
     const updatedName = await updateName(newName);
     await setName(updatedName);
+    console.log(optimisticName);
   };
 
   return (
