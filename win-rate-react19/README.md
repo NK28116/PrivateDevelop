@@ -1,6 +1,6 @@
 # React 19 の新機能
 
-## [WIP]useFormStatus: SubmitForm.tsx
+## useFormStatus: SubmitForm.tsx
 - 直近のフォーム送信に関するステータス
 ```jsx
 const { pending, data, method, action } = useFormStatus();
@@ -80,6 +80,12 @@ function MyComponent(): {state: Type, formAction: () => void} {
   );
 }
 ```
+### useOptimistic: SubmitForm.tsx
+https://qiita.com/Yasushi-Mo/items/abaddd44b92ba007e0c7
+- 登録後の状態を見せることができる
+  - hogeを登録したときに登録中であることを示せる
+  - この時のスタイルを変えるのにuseFromStatusを使うことができてisPending=trueのときはグレーアウトさせてtrue-> falseになったら元のスタイルにあわせる，みたいなことができるハズ
+
 
 # Getting Started with Create React App
 

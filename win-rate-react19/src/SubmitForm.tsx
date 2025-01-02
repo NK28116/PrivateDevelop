@@ -58,7 +58,7 @@ function Thread({ names, sendName }: ThreadProps) {
       <form action={formAction} ref={formRef}>
         <input type="text" name="name" placeholder="Your Name!" />
         <button type="submit">Submit</button>
-         <SubmitNamePlaceHolder />
+        <SubmitNamePlaceHolder />
       </form>
             {optimisticNames.map((name, index) => (
               <div key={index}>

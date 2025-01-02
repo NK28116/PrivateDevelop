@@ -24,7 +24,7 @@ function useDecrementState() {
 }
 
 
-export  function WinIncDecButton({setTotalWinState,}: {  setTotalWinState: React.Dispatch<React.SetStateAction<number>>;}){
+export function WinIncDecButton({setTotalWinState,}: {  setTotalWinState: React.Dispatch<React.SetStateAction<number>>;}){
     const { stateInc, formAction: incrementAction } = useIncrementState();
     const { stateDec, formAction: decrementAction } = useDecrementState();
     const totalWinState = stateInc + stateDec;
@@ -46,7 +46,6 @@ export  function WinIncDecButton({setTotalWinState,}: {  setTotalWinState: React
             <div>Decrement State: {stateDec}</div> */}
             <button type="submit">-</button>
         </form>
-        <h3>ここまで勝利数</h3>
         </div>
     );
 }
@@ -71,7 +70,6 @@ export  function LoseIncDecButton({setTotalLoseState,}: {  setTotalLoseState: Re
             <div>Decrement State: {stateDec}</div>*/}
             <button type="submit">-</button>
         </form>
-        <h3>ここまで敗北数</h3>
         </div>
     );
 }
