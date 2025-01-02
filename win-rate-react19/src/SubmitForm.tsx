@@ -1,7 +1,43 @@
-import { useOptimistic, useState, useRef, FormEvent } from "react";
+import { useOptimistic, useState, useRef } from "react";
+import { useFormStatus } from "react-dom";
+
+async function submitForm(query:any) {
+    await new Promise((res) => setTimeout(res, 1000));
+}
+
+///placeHolder付き
+function SubmitNamePlaceHolder() {
+    const { pending, data } = useFormStatus();
+    return (
+        <div>
+            <h3>Submit Name: </h3>
+            <input type="text" name="username" disabled={pending} />
+            <button type="submit" disabled={pending}>
+                Submit
+            </button>
+            <br />
+            <p>{data ? `Submitting ${data?.get("username")}...` : ""}</p>
+        </div>
+    );
+}
+
+export  function SubmitInput() {
+    const ref = useRef<HTMLFormElement>(null!);
+    return (
+        <form
+            ref={ref}
+            action={async (formData) => {
+            await submitForm(formData);
+            ref.current.reset();
+            }}
+        >
+        <SubmitNamePlaceHolder />
+        </form>
+    );
+}
 
 // deliverName関数の引数と戻り値の型を定義
-export async function deliverName(name: string): Promise<string> {
+ async function deliverName(name: string): Promise<string> {
   console.log(typeof name);
   await new Promise((res) => setTimeout(res, 1000));
   return name;
@@ -51,8 +87,8 @@ function Thread({ names, sendName }: ThreadProps) {
         </div>
       ))}
       <form action={formAction} ref={formRef}>
-        <input type="text" name="name" placeholder="Hello!" />
-        <button type="submit">Send</button>
+        <input type="text" name="name" placeholder="Your Name!" />
+        <button type="submit">Submit</button>
       </form>
     </>
   );
@@ -69,5 +105,8 @@ export  function SubmitForm() {
     setNames((names) => [...names, { text: sentName, sending: false }]);
   }
 
-  return <Thread names={names} sendName={sendName} />;
+  return (
+      <Thread names={names} sendName={sendName} />
+
+      );
 }

@@ -1,6 +1,6 @@
 import React from 'react';
 import './App.css';
-import {SubmitInput} from "./SubmitForm";
+import {SubmitForm,SubmitInput} from "./SubmitForm";
 import {WinRate} from "./WinRate/WinRate";
 
 function App() {
@@ -14,8 +14,9 @@ function App() {
             <FormTest3 />
             <SubmitButton />
             */}
-
             <SubmitInput />
+
+            <SubmitForm />
         </div>
     );
 }
