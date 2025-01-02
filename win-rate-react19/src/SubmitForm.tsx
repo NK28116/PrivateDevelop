@@ -1,7 +1,7 @@
 import { useOptimistic, useState, useRef } from "react";
 import { useFormStatus } from "react-dom";
 
-async function submitForm(query:any) {
+async function submitForm(query:FormData) {
     await new Promise((res) => setTimeout(res, 1000));
 }
 
@@ -10,35 +10,13 @@ function SubmitNamePlaceHolder() {
     const { pending, data } = useFormStatus();
     return (
         <div>
-            <h3>Submit Name: </h3>
-            <input type="text" name="username" disabled={pending} />
-            <button type="submit" disabled={pending}>
-                Submit
-            </button>
-            <br />
-            <p>{data ? `Submitting ${data?.get("username")}...` : ""}</p>
+            <p>{data ? `Submitting ${data?.get("name")}...` : ""}</p>
         </div>
-    );
-}
-
-export  function SubmitInput() {
-    const ref = useRef<HTMLFormElement>(null!);
-    return (
-        <form
-            ref={ref}
-            action={async (formData) => {
-            await submitForm(formData);
-            ref.current.reset();
-            }}
-        >
-        <SubmitNamePlaceHolder />
-        </form>
     );
 }
 
 // deliverName関数の引数と戻り値の型を定義
  async function deliverName(name: string): Promise<string> {
-  console.log(typeof name);
   await new Promise((res) => setTimeout(res, 1000));
   return name;
 }
@@ -60,7 +38,6 @@ function Thread({ names, sendName }: ThreadProps) {
 
   // formActionの引数の型をFormDataに設定
   async function formAction(formData: FormData): Promise<void> {
-    console.log(typeof formData);
     addOptimisticName(formData.get("name") as string); // 名前を文字列として扱う
     formRef.current?.reset();
     await sendName(formData);
@@ -80,16 +57,18 @@ function Thread({ names, sendName }: ThreadProps) {
 
   return (
     <>
-      {optimisticNames.map((name, index) => (
-        <div key={index}>
-          {name.text}
-          {!!name.sending && <small> (Sending...)</small>}
-        </div>
-      ))}
+
       <form action={formAction} ref={formRef}>
         <input type="text" name="name" placeholder="Your Name!" />
         <button type="submit">Submit</button>
+         <SubmitNamePlaceHolder />
       </form>
+            {optimisticNames.map((name, index) => (
+              <div key={index}>
+                {name.text}
+              </div>
+            ))}
+
     </>
   );
 }
@@ -97,7 +76,7 @@ function Thread({ names, sendName }: ThreadProps) {
 // AppコンポーネントのstateとsendName関数の型を追加
 export  function SubmitForm() {
   const [names, setNames] = useState<NameItem[]>([
-    { text: "Hello there!", sending: false, key: 1 },
+    { text: "", sending: false, key: 1 },
   ]);
 
   async function sendName(formData: FormData): Promise<void> {
@@ -107,6 +86,5 @@ export  function SubmitForm() {
 
   return (
       <Thread names={names} sendName={sendName} />
-
       );
 }
