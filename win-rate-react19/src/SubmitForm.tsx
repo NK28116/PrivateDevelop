@@ -1,74 +1,73 @@
-import { useFormStatus } from "react-dom";
-import {useOptimistic, useRef } from "react";
-async function submitForm(query:FormData) {
-    await new Promise((res) => setTimeout(res, 1000));
-    return query;
+import { useOptimistic, useState, useRef, FormEvent } from "react";
+
+// deliverName関数の引数と戻り値の型を定義
+export async function deliverName(name: string): Promise<string> {
+  console.log(typeof name);
+  await new Promise((res) => setTimeout(res, 1000));
+  return name;
 }
 
-//submitItems-> SubmitUserNameForm内で使う
-//pending is true で
-function SubmitItems({items,sendFunction}:{items:String,sendFunction:Function}) {
- const formRef = useRef();
+// Threadコンポーネントのpropsに型を追加
+interface NameItem {
+  text: string;
+  sending: boolean;
+  key?: number; // key はReact が自動的に生成するので、必須ではない
+}
 
-  const [optimisticItems, addOptimisticItem] = useOptimistic(
-    items,
-    (state, newItem:FormData) => [
-      ...state,newItem?.append("username","")
+interface ThreadProps {
+  names: NameItem[];
+  sendName: (formData: FormData) => Promise<void>;
+}
+
+function Thread({ names, sendName }: ThreadProps) {
+  const formRef = useRef<HTMLFormElement | null>(null);
+
+  // formActionの引数の型をFormDataに設定
+  async function formAction(formData: FormData): Promise<void> {
+    console.log(typeof formData);
+    addOptimisticName(formData.get("name") as string); // 名前を文字列として扱う
+    formRef.current?.reset();
+    await sendName(formData);
+  }
+
+  // optimisticNamesとaddOptimisticNameに型を付ける
+  const [optimisticNames, addOptimisticName] = useOptimistic<NameItem[], string>(
+    names,
+    (state, newName) => [
+      ...state,
+      {
+        text: newName,
+        sending: true,
+      },
     ]
   );
-  async function formAction(formData: FormData) {
-    addOptimisticItem(formData.get("username"));
-    formRef.current.reset();
-    await sendFunction(formData);
-  }
 
   return (
     <>
-      {optimisticItems.map((item, index) => (
+      {optimisticNames.map((name, index) => (
         <div key={index}>
-          {item.text}
-          {!!item.{pending} && <small> (Sending...)</small>}
+          {name.text}
+          {!!name.sending && <small> (Sending...)</small>}
         </div>
       ))}
       <form action={formAction} ref={formRef}>
-        <input type="text" name="message" placeholder="Hello!" />
+        <input type="text" name="name" placeholder="Hello!" />
         <button type="submit">Send</button>
       </form>
     </>
   );
 }
 
-///placeHolder
-function SubmitUserNameForm() {
-    const { pending, data } = useFormStatus();
+// AppコンポーネントのstateとsendName関数の型を追加
+export  function SubmitForm() {
+  const [names, setNames] = useState<NameItem[]>([
+    { text: "Hello there!", sending: false, key: 1 },
+  ]);
 
-    //placeHolderにinputされたdata の中の"username"を取得
-    const viewData=data?.get("username")
-    console.log("data",viewData);
+  async function sendName(formData: FormData): Promise<void> {
+    const sentName = await deliverName(formData.get("name") as string);
+    setNames((names) => [...names, { text: sentName, sending: false }]);
+  }
 
-      async function sendNames(formData:FormData) {
-        const sentName = await submitForm(formData.get("username"));
-        setNames((names) => [...names, { text: sentName }]);
-      }
-
-    return (
-        <div>
-            <SubmitItems items={viewData} sendFunction={sendNames} />
-        </div>
-    );
-}
-
-export  function SubmitInput() {
-    const ref = useRef<HTMLFormElement>(null!);
-    return (
-        <form
-            ref={ref}
-            action={async (formData) => {
-            await submitForm(formData);
-            ref.current.reset();
-            }}
-        >
-        <SubmitUserNameForm />
-        </form>
-    );
+  return <Thread names={names} sendName={sendName} />;
 }
