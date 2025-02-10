@@ -56,3 +56,135 @@
 - リリースとかサイズ感とかをを考えると他でも構わないが，自分の勉強のためにnuxtにする
 - webコンパイラとドキュメントは`https://learn-nuxt.vuejs-jp.org/vue` にある
 - 勉強のためのファイルは `PrivateDevelop/NuxtLecture`を用いる
+
+# Structure
+
+```
+fightstick.html
+|_head
+   |_ meta
+   |_ meta
+   |_ meta
+   |_ title
+   |_ link
+   |_ link
+|_body
+   |_ span class=tooltip
+      |_ div id=assignbuttontooltip class=tooltiptext tooltiptextassignbutton
+      |_ div id=container class=container
+         |_ div id=gamepad0 class=gamepad-background
+            |_ div id="gamepad-background-image" class="gamepad-disconnected"
+            |_ div id="gamepad-area" class="gamepad-area"
+               |_ <div id="gamepad-area-background" class="gamepad-area-background"
+               |_ <div id="stick-area" class="stick-area">
+                  |_ <div id="stick" class="stick">
+                  |_ <div id="stick-up" class="stick-block stick-up">
+                  |_ <div id="stick-down" class="stick-block stick-down">
+                  |_ <div id="stick-left" class="stick-block stick-left">
+                  |_ <div id="stick-right" class="stick-block stick-right">
+               |_ <div id="button-area" class="button-area">
+   |_ div id="inputlist" class="inputlist hide"
+   |_ div id="inputarea" class="hide"
+      |_ fieldset id="titlefield"
+         |_ div
+            |_ span class="tooltip"
+               |_ div class="tooltiptext tooltiptexttitle"
+               |_ a class="titletext"
+      |_ fieldset id="inputareafield" class="invisiblefieldset"
+         |_ ul class="tabs"
+            |_ div id="tab-topline" class="tab-topline"
+               |_ input id="tab1"
+               |_ label
+               |_ div id="tab-content1" class="tab-content"
+                  |_ div id="savelink"
+                     |_ label
+                        |_ span class="tooltip"
+                           |_ div id="savelinktooltip" class="tooltiptext tooltiptextlink"
+                           |_ input id="savelinktext" 
+                     |_ button
+                  |_ div id="customlink"
+                     |_ label
+                        |_ span  class="tooltip"
+                           |_ div id="customlinktooltip" class="tooltiptext tooltiptextlink" 
+                           |_input id="customlinktext"
+                     |_ button class="copybtn"
+                     |_ button
+                  |_ div id="obsbrowserlink" class="hide
+                     |_ label 
+                        |_ span lass="tooltip"
+                           |_ div   id="obslinktooltip" class="tooltiptext tooltiptextlink"
+                           |_input id="obsbrowserlinktext" 
+                     |_button class="copybtn"
+                  |_ div id="scale"
+                     |_ label
+                        |_ input class="inputnumber" id="scalevalue"
+                  |_ div id="bgopacity"
+                     |_ label
+                        |_ input  id="bgopacityvalue"  class="inputnumber" 
+            |_ li
+               |_ input id="tab1"
+               |_ label
+               |_ div  id="tab-content1" class="tab-content"
+                  |_ div id="savelink"
+                     |_ label
+                        |_ span class="tooltip"
+                           |_ div id="savelinktooltip" class="tooltiptext tooltiptextlink"
+                           |_ input id="savelinktext"
+                     |_ button
+                  |_ div
+                  |_ div
+                  |_ div
+                  |_ div
+                  
+            |_ li
+               |_ input id="tab2"
+               |_ label
+               |_ div id="tab-content2" class="tab-content"
+                  |_ div id="userspecific"
+                     |_ input id="userspecifictoggle" class="checkboxbutton"
+                     |_ span
+                     |_ span class="tooltip"
+                        |_ div class="tooltiptext tooltiptextlink"
+                        |_ a
+                     |_ div id="userspecificdropdown" class="dropdown"
+                        |_ form id="userspecificform" 
+                           |_ fieldset id="userspecificfield"
+                              |_ legend
+                              |_ div class="tooltip"
+                                 |_ div class="tooltiptext tooltiptextuserspecific"
+                                 |_ span  class="userspecificname"
+                                    |_ input  id="userspecifican" class="inputnumbervalue"
+                                    |_ input   id="userspecifican" class="inputnumbervalue"
+                                 |_ span  class="userspecificname"
+                                    |_ input   id="userspecifican" class="inputnumbervalue"
+                                    |_ input    id="userspecifican" class="inputnumbervalue"                   
+                                    |_ input     id="userspecifican" class="inputnumbervalue"           
+                                 |_ span  class="userspecificname"
+                                    |_ input  id="userspecifican" class="inputnumbervalue"
+                                    |_ input  id="userspecifican" class="inputnumbervalue"
+                                    |_ input   id="userspecifican" class="inputnumbervalue"
+                                 |_ span  class="userspecificname"
+                                    |_ input  id="userspecifican" class="inputnumbervalue"
+                                    |_ input  id="userspecifican" class="inputnumbervalue"
+                                    |_ input   id="userspecifican" class="inputnumbervalue"
+                                 |_ span  class="userspecificname"
+                                    |_ input  id="userspecifican" class="inputnumbervalue"
+                                    |_ input  id="userspecifican" class="inputnumbervalue"
+                                    |_ input  id="userspecifican" class="inputnumbervalue"
+                                 |_ span  class="userspecificname"
+                                    |_ input  id="userspecifican" class="inputnumbervalue"
+                                    |_ input  id="userspecifican" class="inputnumbervalue"
+                                    |_ input  id="userspecifican" class="inputnumbervalue"
+                                 |_ span  class="userspecificname"
+                                    |_ input  id="userspecifican" class="inputnumbervalue"
+                                    |_ input  id="userspecifican" class="inputnumbervalue"
+                                 |_ span   class="userspecificname"
+                                    |_ input id="userspecifican" class="inputnumbervalue"
+                                    |_ input  id="userspecifican" class="inputnumbervalue"
+                                 |_ span  class="userspecificname"
+                                    |_ input id="userspecifican" class="inputnumbervalue"
+                                    |_ input  id="userspecifican" class="inputnumbervalue"
+            |_ li
+   |_ script
+
+```

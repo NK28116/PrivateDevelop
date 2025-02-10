@@ -10,7 +10,8 @@
 </head>
 <body style="margin:0px;">
 
-	<span class="tooltip"><div id="assignbuttontooltip" class="tooltiptext tooltiptextassignbutton"></div>
+	<span class="tooltip">
+		<div id="assignbuttontooltip" class="tooltiptext tooltiptextassignbutton"></div>
 		<div id="container" class=container">
 			<div id="gamepad0" class="gamepad-background">
 				<div id="gamepad-background-image" class="gamepad-disconnected"></div>
@@ -54,7 +55,8 @@
 
 					<div id="savelink">
 						<label>The URL below will reproduce current setup:<br>
-							<span class="tooltip"><div id="savelinktooltip" class="tooltiptext tooltiptextlink"></div>
+							<span class="tooltip">
+								<div id="savelinktooltip" class="tooltiptext tooltiptextlink"></div>
 								<input type="text" id="savelinktext" value="" readonly style="width:500px;">
 							</span>
 						</label>
@@ -63,7 +65,8 @@
 
 					<div id="customlink">
 						<label>The URL below will show the graphic part only:<br>
-							<span class="tooltip"><div id="customlinktooltip" class="tooltiptext tooltiptextlink"></div>
+							<span class="tooltip">
+								<div id="customlinktooltip" class="tooltiptext tooltiptextlink"></div>
 								<input type="text" id="customlinktext" value="" readonly style="width:500px;">
 							</span>
 						</label>
@@ -73,7 +76,8 @@
 
 					<div id="obsbrowserlink" class="hide">
 						<label>Copy the URL below and paste to the OBS Browser Source configuration:<br>
-							<span class="tooltip"><div id="obslinktooltip" class="tooltiptext tooltiptextlink"></div>
+							<span class="tooltip">
+								<div id="obslinktooltip" class="tooltiptext tooltiptextlink"></div>
 								<input type="text" id="obsbrowserlinktext" value="" readonly style="width:500px;">
 							</span>
 						</label>
@@ -81,11 +85,13 @@
 					</div>
 
 					<div id="scale">
-						<label>Scale: <input type="number" id="scalevalue" value="1.0" step="0.1" min="0.1" max="10.0" class="inputnumber" onchange="checkInputNumber3(this); updateScale(this.value);"></label>
+						<label>Scale:
+							<input type="number" id="scalevalue" value="1.0" step="0.1" min="0.1" max="10.0" class="inputnumber" onchange="checkInputNumber3(this); updateScale(this.value);"></label>
 					</div>
 
 					<div id="bgopacity">
-						<label>Background Opacity: <input type="number" id="bgopacityvalue" value="1.0" step="0.1" min="0.0" max="1.0" class="inputnumber" onchange="checkInputNumber3(this); updateBgOpacity(this.value);"></label>
+						<label>Background Opacity:
+							<input type="number" id="bgopacityvalue" value="1.0" step="0.1" min="0.0" max="1.0" class="inputnumber" onchange="checkInputNumber3(this); updateBgOpacity(this.value);"></label>
 					</div>
 
 				</div>
@@ -98,25 +104,49 @@
 					<div id="userspecific">
 						<input type="checkbox" id="userspecifictoggle" class="checkboxbutton" onclick="toggleClassNameById('userspecificdropdown', 'dropdownopen', this.checked); updateLink();"><label class="checkboxlabel" for="userspecifictoggle">User Specific</label>
 						<span>( For who has issue that there is no response on stick(d-pad) motions.</span>
-						<span class="tooltip"><div class="tooltiptext tooltiptextlink">https://obsproject.com/forum/resources/display-fightstick-motions.344/update?update=858</div>
-						<a href="https://obsproject.com/forum/resources/display-fightstick-motions.344/update?update=858" target="_blank">Click here for more information.</a>
+						<span class="tooltip">
+							<div class="tooltiptext tooltiptextlink">https://obsproject.com/forum/resources/display-fightstick-motions.344/update?update=858</div>
+							<a href="https://obsproject.com/forum/resources/display-fightstick-motions.344/update?update=858" target="_blank">Click here for more information.</a>
 						</span>)
 						<div id="userspecificdropdown" class="dropdown">
 							<form id="userspecificform" onchange="updateLink();">
-							<fieldset id="userspecificfield">
-								<legend>Stick</legend>
-								<div class="tooltip"><div class="tooltiptext tooltiptextuserspecific">"Value" is rounded to 2 decimal places.</div>
-									<span class="userspecificname">Neutral:</span>Axis: <input type="number" id="userspecifican" class="inputnumbervalue" min="0" max="99" step="1"> Value: <input type="number" id="userspecificvn" class="inputnumbervalue"><br style="clear:both">
-									<span class="userspecificname">Up:</span>Axis: <input type="number" id="userspecificau" class="inputnumbervalue" min="0" max="99" step="1"> Value: <input type="number" id="userspecificvu" class="inputnumbervalue"> Assign to button: <input type="number" id="userspecificbu" class="inputnumbervalue" min="1"><br style="clear:both">
-									<span class="userspecificname">Down:</span>Axis: <input type="number" id="userspecificad" class="inputnumbervalue" min="0" max="99" step="1"> Value: <input type="number" id="userspecificvd" class="inputnumbervalue"> Assign to button: <input type="number" id="userspecificbd" class="inputnumbervalue" min="1"><br style="clear:both">
-									<span class="userspecificname">Left:</span>Axis: <input type="number" id="userspecifical" class="inputnumbervalue" min="0" max="99" step="1"> Value: <input type="number" id="userspecificvl" class="inputnumbervalue"> Assign to button: <input type="number" id="userspecificbl" class="inputnumbervalue" min="1"><br style="clear:both">
-									<span class="userspecificname">Right:</span>Axis: <input type="number" id="userspecificar" class="inputnumbervalue" min="0" max="99" step="1"> Value: <input type="number" id="userspecificvr" class="inputnumbervalue"> Assign to button: <input type="number" id="userspecificbr" class="inputnumbervalue" min="1"><br style="clear:both">
-									<span class="userspecificname">Up-Left:</span>Axis: <input type="number" id="userspecificaul" class="inputnumbervalue" min="0" max="99" step="1"> Value: <input type="number" id="userspecificvul" class="inputnumbervalue"><br style="clear:both">
-									<span class="userspecificname">Down-Left:</span>Axis: <input type="number" id="userspecificadl" class="inputnumbervalue" min="0" max="99" step="1"> Value: <input type="number" id="userspecificvdl" class="inputnumbervalue"><br style="clear:both">
-									<span class="userspecificname">Up-Right:</span>Axis: <input type="number" id="userspecificaur" class="inputnumbervalue" min="0" max="99" step="1"> Value: <input type="number" id="userspecificvur" class="inputnumbervalue"><br style="clear:both">
-									<span class="userspecificname">Down-Right:</span>Axis: <input type="number" id="userspecificadr" class="inputnumbervalue" min="0" max="99" step="1"> Value: <input type="number" id="userspecificvdr" class="inputnumbervalue"><br style="clear:both">
+								<fieldset id="userspecificfield">
+									<legend>Stick</legend>
+									<div class="tooltip">
+										<div class="tooltiptext tooltiptextuserspecific">"Value" is rounded to 2 decimal places.</div>
+										<span class="userspecificname">Neutral:</span>
+											Axis: <input type="number" id="userspecifican" class="inputnumbervalue" min="0" max="99" step="1">
+											Value: <input type="number" id="userspecificvn" class="inputnumbervalue"><br style="clear:both">
+										<span class="userspecificname">Up:</span>
+											Axis: <input type="number" id="userspecificau" class="inputnumbervalue" min="0" max="99" step="1">
+											Value: <input type="number" id="userspecificvu" class="inputnumbervalue">
+											Assign to button: <input type="number" id="userspecificbu" class="inputnumbervalue" min="1"><br style="clear:both">
+										<span class="userspecificname">Down:</span>
+											Axis: <input type="number" id="userspecificad" class="inputnumbervalue" min="0" max="99" step="1">
+											Value: <input type="number" id="userspecificvd" class="inputnumbervalue">
+											Assign to button: <input type="number" id="userspecificbd" class="inputnumbervalue" min="1"><br style="clear:both">
+										<span class="userspecificname">Left:</span>
+											Axis: <input type="number" id="userspecifical" class="inputnumbervalue" min="0" max="99" step="1">
+											Value: <input type="number" id="userspecificvl" class="inputnumbervalue">
+											Assign to button: <input type="number" id="userspecificbl" class="inputnumbervalue" min="1"><br style="clear:both">
+										<span class="userspecificname">Right:</span>
+											Axis: <input type="number" id="userspecificar" class="inputnumbervalue" min="0" max="99" step="1">
+											Value: <input type="number" id="userspecificvr" class="inputnumbervalue">
+											Assign to button: <input type="number" id="userspecificbr" class="inputnumbervalue" min="1"><br style="clear:both">
+										<span class="userspecificname">Up-Left:</span>
+											Axis: <input type="number" id="userspecificaul" class="inputnumbervalue" min="0" max="99" step="1">
+											Value: <input type="number" id="userspecificvul" class="inputnumbervalue"><br style="clear:both">
+										<span class="userspecificname">Down-Left:</span>
+											Axis: <input type="number" id="userspecificadl" class="inputnumbervalue" min="0" max="99" step="1">
+											Value: <input type="number" id="userspecificvdl" class="inputnumbervalue"><br style="clear:both">
+										<span class="userspecificname">Up-Right:</span>
+											Axis: <input type="number" id="userspecificaur" class="inputnumbervalue" min="0" max="99" step="1">
+											Value: <input type="number" id="userspecificvur" class="inputnumbervalue"><br style="clear:both">
+										<span class="userspecificname">Down-Right:</span>
+											Axis: <input type="number" id="userspecificadr" class="inputnumbervalue" min="0" max="99" step="1">
+											Value: <input type="number" id="userspecificvdr" class="inputnumbervalue"><br style="clear:both">
 								</div>
-							</fieldset>
+								</fieldset>
 							</form>
 						</div>
 					</div>
@@ -284,6 +314,6 @@
 
 	</div>
 
-<script id="javascript" src="assets/script.js"></script>
+	<script id="javascript" src="assets/script.js"></script>
 </body>
 </html>
