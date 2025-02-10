@@ -50,3 +50,9 @@
 
 ## 3. EWGFなどの練習モードを追加
 - inputHistoryで6-2-3RPで最速になっていないと3のみが表示されるのでその場合は「失敗」と表示されるようにする
+
+# 使用する言語，フレームワーク
+- モダンなフレームワークであるNuxt.jsをtypescriptベースで書く
+- リリースとかサイズ感とかをを考えると他でも構わないが，自分の勉強のためにnuxtにする
+- webコンパイラとドキュメントは`https://learn-nuxt.vuejs-jp.org/vue` にある
+- 勉強のためのファイルは `PrivateDevelop/NuxtLecture`を用いる
