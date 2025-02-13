@@ -2,6 +2,7 @@ import React from 'react';
 import './App.css';
 import {SubmitForm} from "./SubmitForm";
 import {WinRate} from "./WinRate/WinRate";
+import WinRateList from "./WinRateList";
 
 function App() {
     console.log(WinRate)
@@ -18,6 +19,7 @@ function App() {
             <SubmitInput />
             */}
             <SubmitForm />
+            <WinRateList />
         </div>
     );
 }
