@@ -1,5 +1,6 @@
 import {splitArrayByCondition} from './eventArraySlice';
 import {Locator, Page} from "@playwright/test";
+import {OwnCalendar} from "./makeiCalFile";
 
 const playwright = require('playwright');
 
@@ -20,6 +21,19 @@ const playwright = require('playwright');
 //console.log(count);
   let idArray: string[] = [];
   let countArray:number[]=[];
+/**
+ * 指定したID間の要素数を取得
+ * @param page PlaywrightのPageオブジェクト
+ * @param startId 開始要素のID (例: "day_2025-03-30")
+ * @param endId 終了要素のID (例: "day_2025-03-31")
+ * @returns 要素数
+ */
+const countElementsBetween=async(page: Page, startId: string, endId: string): Promise<number> =>{
+    const betweenElements: Locator = page.locator(
+        `//*[@id="${startId}"]/following-sibling::*[following-sibling::*[@id="${endId}"]]`
+    );
+    return  await betweenElements.count();
+}
 
   for (let i = 0; i < count; i++) {
       //数えはじめのidを取得，配列の名前になる
@@ -63,7 +77,6 @@ countArray.splice(-1,1);//要素数
    };
    //console.log(detailArray);
 
-
 let index = 0;
 const result: [string, string[]][] = idArray.map((dayArray, i) => {
   const subArray = detailArray.slice(index, index + countArray[i]);
@@ -71,33 +84,72 @@ const result: [string, string[]][] = idArray.map((dayArray, i) => {
   return [dayArray, subArray];
 });
 
-console.log(result);
+/**
+*
+* result:length 14
+* result[3]:length 2
+*
+* [
+  *   '20250324',
+  *   [
+  *     '02:00\nアメリカ アークワールドツアー2024ファイナル 3日目\n海外 格闘ゲーム大会',
+  *     '時間\n未確認\nV最スト6 スクリム開始日\nスト6イベント',
+  *     '12:00\nTEKKEN Talk Live シーズン2＆アンナスペシャル\n鉄拳8イベント',
+  *     '21:00\nOVER THE LIMIT ※参加制限あり大会\nオンライン Vセイヴァー大会',
+  *     '21:00\nブロジョ杯 ※日・韓・台・港範囲でのオンライン大会\nオンライン GGST大会',
+  *     '21:00\nOkinawa Onedot\nオンライン スト6大会'
+  *   ]
+  * ]
+
+  * result[3][1]:length 6
+  * [
+  *   '02:00\nアメリカ アークワールドツアー2024ファイナル 3日目\n海外 格闘ゲーム大会',
+  *   '時間\n未確認\nV最スト6 スクリム開始日\nスト6イベント',
+  *   '12:00\nTEKKEN Talk Live シーズン2＆アンナスペシャル\n鉄拳8イベント',
+  *   '21:00\nOVER THE LIMIT ※参加制限あり大会\nオンライン Vセイヴァー大会',
+  *   '21:00\nブロジョ杯 ※日・韓・台・港範囲でのオンライン大会\nオンライン GGST大会',
+  *   '21:00\nOkinawa Onedot\nオンライン スト6大会'
+  * ]
+  *
+result[3][1][0]
+  * 02:00
+  * アメリカ アークワールドツアー2024ファイナル 3日目
+  * 海外 格闘ゲーム大会
+*/
+console.log(result.length);
 
 /**
-* ics形式にするため
-* type OwnCalendar = {
-            *   Date: number;
-            *   Hour: number;
-            *   Minutes: number;
-            *   Event: string;
-            * };
-* に合わせる
+* 時間 \n 未確認\n V最スト6 スクリム開始日\nスト6イベント
+  *
+  * 12 : 00 \n TEKKEN Talk Live シーズン2＆アンナスペシャル\n鉄拳8イベント,
+  *
+  * 繰り返し変数 j k
+  *
+  * Date→ result[ j ][ 0 ]
+  *
+  * Hour→ result[ j ][ 1 ][ k ] の ”:” or “\n”の手前
+  *
+  * Minutes → result[ j ][ 1 ][ k ] の ”:”or”\n” と ”\n” の間か
+  *
+  * event → result[ j ][ 1 ][ k ] の ”\n” の後
+* @param sentence
 */
+
+const sliceString = (sentence: string) => {
+  const modifiedSentence = sentence.replace(":", "\n"); // 置換処理
+
+  const hour = modifiedSentence.split("\n")[0]; // ":" の前の部分を取得
+  const minutes = modifiedSentence.split("\n")[1];
+  const event= modifiedSentence.split("\n")[2];
+};
+
+let kakugameSchedule:OwnCalendar[]=[]
+for(let j=0;j<count;j++){
+    kakugameSchedule.Date.push(result[j][0])
+}
+
 
   await browser.close();
 })();
 
 
-/**
- * 指定したID間の要素数を取得
- * @param page PlaywrightのPageオブジェクト
- * @param startId 開始要素のID (例: "day_2025-03-30")
- * @param endId 終了要素のID (例: "day_2025-03-31")
- * @returns 要素数
- */
-async function countElementsBetween(page: Page, startId: string, endId: string): Promise<number> {
-    const betweenElements: Locator = page.locator(
-        `//*[@id="${startId}"]/following-sibling::*[following-sibling::*[@id="${endId}"]]`
-    );
-    return await betweenElements.count();
-}

@@ -7,7 +7,7 @@ const example: OwnCalendar[] = [
 const STARTICS = "BEGIN:VCALENDAR\r\nVERSION:2.0\r\nPRODID:kunihiros iCalender\r\n";
 const ENDICS = "END:VCALENDAR\r\n";
 
-type OwnCalendar = {
+export type OwnCalendar = {
   Date: number;
   Hour: number;
   Minutes: number;
@@ -26,11 +26,11 @@ function makeSummary(title: string) {
   return `SUMMARY:${title}\r\nEND:VEVENT\r\n`;
 }
 
-function makeiCalBlock(event: OwnCalendar) {
+export  function makeiCalBlock(event: OwnCalendar) {
   return `BEGIN:VEVENT\r\nDTSTART;${makeDtTime(event.Date, event.Hour, event.Minutes)}DTEND;${makeDtTime(event.Date, event.Hour, event.Minutes)}${makeSummary(event.Event)}`;
 }
 
-function makeiCalText() {
+ function makeiCalText() {
   let body = example.map(event => makeiCalBlock(event)).join('');
   return STARTICS + body + ENDICS;
 }
