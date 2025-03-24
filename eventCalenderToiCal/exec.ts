@@ -116,7 +116,7 @@ result[3][1][0]
   * アメリカ アークワールドツアー2024ファイナル 3日目
   * 海外 格闘ゲーム大会
 */
-console.log(result.length);
+//console.log(result.length);
 
 /**
 * 時間 \n 未確認\n V最スト6 スクリム開始日\nスト6イベント
@@ -148,23 +148,40 @@ type calender={
 
 let calenderArray:calender[]=[]
 let scheduleArray:schedule[]=[]
-
+//02:00
+  // アメリカ アークワールドツアー2024ファイナル 3日目
+  // 海外 格闘ゲーム大会
+  //終日を指定する場合DTSTART+1日する
 for(let j=0;j<result.length;j++){
     for(let k=0;k<result[j][1].length;k++){
-        const hour=Number(result[j][1][k].replace(";","\n").split("\n")[0])
-        const minute=Number(result[j][1][k].replace(";","\n").split("\n")[1])
+        const modifiedResult=result[j][1][k].replace(":","\n");
+        const modifiedHourString=modifiedResult.split("\n")[0];
+        const modifiedMinuteString=modifiedResult.split("\n")[1];
+        const moifiedEventString=modifiedResult.split("\n").slice(2).join("\n");
+
+        let hour:number;
+        if(modifiedHourString==="時間"){
+            hour=25;
+        }else{
+            hour=Number(modifiedResult.split("\n")[0])// "時間"が出たら終日の予定にする
+        }
+
+        let minute:number
+        if (modifiedMinuteString==="未確認"){
+            minute=61;
+        }else{
+            minute=Number(modifiedResult.split("\n")[1])//”未確認”が出たら終日の予定にする
+        }
+
         const event=result[j][1][k].replace(";","\n").split("\n")[2]
-        scheduleArray.push({hour:hour,minutes:minute,event:event})
+        scheduleArray.push({hour:hour,minutes:minute,event:moifiedEventString})
     }
 
     const date=Number(result[j][0])
     calenderArray.push({date:date,schedule:scheduleArray})
 }
 
-console.log(calenderArray.length)
-
-
-  await browser.close();
+    await browser.close();
 })();
 
 
