@@ -135,18 +135,33 @@ console.log(result.length);
 * @param sentence
 */
 
-const sliceString = (sentence: string) => {
-  const modifiedSentence = sentence.replace(":", "\n"); // 置換処理
-
-  const hour = modifiedSentence.split("\n")[0]; // ":" の前の部分を取得
-  const minutes = modifiedSentence.split("\n")[1];
-  const event= modifiedSentence.split("\n")[2];
-};
-
-let kakugameSchedule:OwnCalendar[]=[]
-for(let j=0;j<count;j++){
-    kakugameSchedule.Date.push(result[j][0])
+type schedule = {
+    hour: number;
+    minutes: number;
+    event: string;
 }
+
+type calender={
+    date:number,
+    schedule:schedule[]
+}
+
+let calenderArray:calender[]=[]
+let scheduleArray:schedule[]=[]
+
+for(let j=0;j<result.length;j++){
+    for(let k=0;k<result[j][1].length;k++){
+        const hour=Number(result[j][1][k].replace(";","\n").split("\n")[0])
+        const minute=Number(result[j][1][k].replace(";","\n").split("\n")[1])
+        const event=result[j][1][k].replace(";","\n").split("\n")[2]
+        scheduleArray.push({hour:hour,minutes:minute,event:event})
+    }
+
+    const date=Number(result[j][0])
+    calenderArray.push({date:date,schedule:scheduleArray})
+}
+
+console.log(calenderArray.length)
 
 
   await browser.close();
