@@ -1,6 +1,7 @@
 import {splitArrayByCondition} from './eventArraySlice';
 import {Locator, Page} from "@playwright/test";
-import {OwnCalendar} from "./makeiCalFile";
+import {icsCalender, makeIcsText} from "./makeiCalFile";
+import * as fs from "node:fs";
 
 const playwright = require('playwright');
 
@@ -146,13 +147,18 @@ type calender={
     schedule:schedule[]
 }
 
+
+
 let calenderArray:calender[]=[]
 let scheduleArray:schedule[]=[]
+let icsCalenderArray:icsCalender[]=[]
 //02:00
   // アメリカ アークワールドツアー2024ファイナル 3日目
   // 海外 格闘ゲーム大会
   //終日を指定する場合DTSTART+1日する
 for(let j=0;j<result.length;j++){
+    const date=Number(result[j][0])
+
     for(let k=0;k<result[j][1].length;k++){
         const modifiedResult=result[j][1][k].replace(":","\n");
         const modifiedHourString=modifiedResult.split("\n")[0];
@@ -175,11 +181,30 @@ for(let j=0;j<result.length;j++){
 
         const event=result[j][1][k].replace(";","\n").split("\n")[2]
         scheduleArray.push({hour:hour,minutes:minute,event:moifiedEventString})
+
+        //makeIcsText()は(number,number,number,string)を引数に取るのでscheduleArrayをバラす
+        const icsCalenderHour=scheduleArray[k].hour
+        const icsCalenderMinutes=scheduleArray[k].minutes
+        const icsCalenderEvent=scheduleArray[k].event
+
+        icsCalenderArray.push({Date:date,Hour:icsCalenderHour,Minutes:icsCalenderMinutes,Event:icsCalenderEvent})
+
     }
 
-    const date=Number(result[j][0])
     calenderArray.push({date:date,schedule:scheduleArray})
+
 }
+const  icsText:string = makeIcsText(icsCalenderArray)
+
+const filePathTxt="./testExecTxt.txt"
+const filePathIcs="./testExecIcs.ics"
+
+fs.writeFile(filePathIcs,icsText,'utf8',(err)=>{
+    if(err){
+        console.log(err)
+    }
+    console.log("EventTxtファイルが作成されました")
+})
 
     await browser.close();
 })();
