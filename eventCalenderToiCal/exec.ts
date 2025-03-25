@@ -1,4 +1,3 @@
-import {splitArrayByCondition} from './eventArraySlice';
 import {Locator, Page} from "@playwright/test";
 import {icsCalender, makeIcsText} from "./makeiCalFile";
 import * as fs from "node:fs";
