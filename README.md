@@ -20,6 +20,7 @@ PRを作成することでフォルダを増やしていく
   - 例”236HP>623LP”を入力したら"（↓↘️→HPの画像）＞（→↓↘︎LPの画像）"と”強波動から弱昇竜”を表示する[]
   - 別リポジトリにあるはずなのでPrivateDevelopの下に落とす
   - graphQLも使いたい
+  - https://github.com/NK28116/numPadToCommandAndSkillName
 
 ### NotStart
 - 
