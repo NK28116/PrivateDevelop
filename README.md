@@ -23,6 +23,6 @@ PRを作成することでフォルダを増やしていく
   - https://github.com/NK28116/numPadToCommandAndSkillName
 
 ### NotStart
-- 
+- [Wavu Wank](https://wank.wavu.wiki) を使ったなにか 
 
 
