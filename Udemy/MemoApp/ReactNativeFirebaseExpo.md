@@ -33,3 +33,13 @@ children(World)はHello Componentの子要素は大抵一つ
 App.tsxからHelloのスタイルを指定する
 Propsにtype TextStyleを追加
 style={{スタイル}}
+
+## セクション11
+expo-router
+ファイルベースのルーティングが可能
+src/appの中にあるファイルが全て画面として認識される
+`npx expo install expo-router react-native-safe-area-context react-native-screens expo-linking expo-constants expo-status-bar react-native-gesture-handler`
+package.jsonで`"main":"expo-router"`にする
+expoを再起動
+App.tsxはもう使わないので削除
+`src/app/_layout.tsx`を追加 -> app内の全ての画面のスタイルを決定する
