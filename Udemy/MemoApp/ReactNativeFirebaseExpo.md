@@ -43,3 +43,18 @@ package.jsonで`"main":"expo-router"`にする
 expoを再起動
 App.tsxはもう使わないので削除
 `src/app/_layout.tsx`を追加 -> app内の全ての画面のスタイルを決定する
+
+flexの位置は
+```
+              justifyContent:'flex-start'
+                             |
+alingnItems:'flex-start'-----*-----alignItems:'flex-end'
+                             |
+                justifyContent:'flex-end'
+
+```
+
+になっている
+
+スタイリング
+`const styles=StyleSheet.create({})`内に定義
