@@ -1,15 +1,16 @@
-import {View,Text,StyleSheet} from 'react-native'
+import {View, Text, StyleSheet, ViewStyle} from 'react-native'
 import {JSX} from "react"
 
 interface Props{
-    mark:string
+    children:JSX.Element
+    style?:ViewStyle
 }
 
 const CircleButton = (props:Props):JSX.Element =>{
-    const {mark}=props
+    const {children,style}=props
     return(
-        <View style={styles.circleButton}>
-            <Text style={styles.circleButtonLabel}>{mark}</Text>
+        <View style={[styles.circleButton,style]}>
+            <Text style={styles.circleButtonLabel}>{children}</Text>
         </View>
     )
 }

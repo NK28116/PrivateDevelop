@@ -58,3 +58,5 @@ alingnItems:'flex-start'-----*-----alignItems:'flex-end'
 
 スタイリング
 `const styles=StyleSheet.create({})`内に定義
+
+一般的なvetor iconはreact-native-vector-icons directoryにある
