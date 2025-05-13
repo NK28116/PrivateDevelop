@@ -60,3 +60,16 @@ alingnItems:'flex-start'-----*-----alignItems:'flex-end'
 `const styles=StyleSheet.create({})`内に定義
 
 一般的なvetor iconはreact-native-vector-icons directoryにある
+
+========デバイスの画面===
+↑
+|
+|
+テキストボックスをflex:1で無理やり引き伸ばし
+|
+|
+↓
+=========デバイスの画面===
+
+キーボードでボタンが隠れる問題は
+'<keyboard avoiding view > </keyboard avoiding view >'
