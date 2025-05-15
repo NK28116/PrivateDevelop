@@ -73,3 +73,16 @@ alingnItems:'flex-start'-----*-----alignItems:'flex-end'
 
 キーボードでボタンが隠れる問題は
 '<keyboard avoiding view > </keyboard avoiding view >'
+
+### インタラクティブとナビゲーション
+#### ボタンやリンクを有効にする
+touchable opecity
+->より詳細なイベントはpressable
+コンポーネントを切り出したの1つ変えただけでも変化が全てのページ出る
+文章をリンク可能にするならtouchableOpacityで囲う
+
+LinkのasChildプロパティは透明度を落とす感じ
+
+submit->login処理->momelist
+
+back buttonはstackでデフォルトなバックボタンを作成できる

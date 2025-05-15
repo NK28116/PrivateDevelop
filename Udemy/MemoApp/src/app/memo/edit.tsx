@@ -4,14 +4,19 @@ import {JSX} from "react";
 import Header from '../../components/Header'
 import CicleButton from '../../components/CircleButton'
 import Icon from '../../components/Icon'
+import {router} from "expo-router";
+
+const handlePress=():void=>{
+    router.back()//1つ前の画面に戻る
+}
+
 const Edit = () :JSX.Element=> {
     return (
         <KeyboardAvoidingView behavior={'height'} style={styles.container}>
-            <Header />
             <View style={styles.inputContainer}>
                 <TextInput multiline style={styles.input} value={"買い物\nリスト"}/>
             </View>
-            <CicleButton>
+            <CicleButton onPress={handlePress}>
                 <Icon name={'check'} size={40} color={'#ffffff'}/>
             </CicleButton>
         </KeyboardAvoidingView>
