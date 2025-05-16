@@ -125,3 +125,5 @@ config.tsの作成
 使用するメアドとパス
 - niwa28116@text.com
 - testpassword
+log inの監視
+- 
