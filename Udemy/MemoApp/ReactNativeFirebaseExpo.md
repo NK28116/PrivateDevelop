@@ -126,4 +126,7 @@ config.tsの作成
 - niwa28116@text.com
 - testpassword
 log inの監視
-- 
+
+テストID
+1sy5r94yH@test.com
+p9sEjcMp9E
