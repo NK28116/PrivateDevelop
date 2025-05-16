@@ -3,19 +3,24 @@ import {JSX} from "react";
 import {Link} from "expo-router"
 
 import Icon from './Icon'
+import {type Memo} from "../../types/memo";
 interface Props{
-    memoListName:string
+    memo: Memo
 }
 
-const MemoListItem = (props:Props) : JSX.Element => {
-    const{memoListName}=props
+const MemoListItem = (props:Props) : JSX.Element|null => {
+    const{ memo } = props
+    const {bodyText,updatedAt}=memo
+    if(bodyText===null||updatedAt===null){return null}
+    const dataString = updatedAt.toDate().toLocaleString('ja-JP')
     return(
         <Link href={'/memo/detail'} asChild>
         <TouchableOpacity style={styles.memoListItems}>
             {/*左側*/}
             <View>
-                <Text style={styles.memoListTitle}>{memoListName}リスト</Text>
-                <Text style={styles.memoListDate}>2025/05/10</Text>
+                <Text numberOfLines={1} style={styles.memoListTitle}>{bodyText}</Text>
+                {/**/}
+                <Text style={styles.memoListDate}>{dataString}</Text>
             </View>
             {/*右側*/}
             <TouchableOpacity>

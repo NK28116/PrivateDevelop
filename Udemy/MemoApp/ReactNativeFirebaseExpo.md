@@ -140,3 +140,4 @@ firebase 構築 firebase database
 
 async-awaitのメリット：コールバックの入れ子を避ける
 
+query(ref)でrefで参照しているものを全て取得
