@@ -1,5 +1,5 @@
 import {View, Text, StyleSheet, TextInput, Alert,TouchableOpacity} from "react-native";
-import {JSX} from "react";
+import {JSX, useState} from "react";
 import {Link, router} from "expo-router"
 
 import Header from '../../components/Header'
@@ -11,12 +11,30 @@ const handlePress=():void=>{
 }
 
 const SignUp =():JSX.Element => {
+    const[email,setEmail]=useState('')
+    const[password,setPassword]=useState('')
     return(
         <View style={styles.container}>
             <View style={styles.inner}>
                 <Text style={styles.title}>Sign Up</Text>
-                <TextInput style={styles.input} value={'Email Address'} />
-                <TextInput style={styles.input} value={'password'} />
+                <TextInput
+                    style={styles.input}
+                    value={email}
+                    onChangeText={(text)=>{setEmail(text)}}
+                    autoCapitalize={'none'}//自動で先頭を大文字にしない
+                    keyboardType={'email-address'}//@を見やすくする
+                    placeholder={'Email Address'}
+                    textContentType={'emailAddress'}//キーチェーンに情報があると自動保管
+                />
+                <TextInput
+                    style={styles.input}
+                    value={password}
+                    onChangeText={(text)=>{setPassword(text)}}
+                    autoCapitalize={'none'}
+                    secureTextEntry//入力した文字をマスクする
+                    placeholder={'Password'}
+                    textContentType={'password'}
+                 />
                 <View style={styles.button}>
                      <Button label={'Submit'} onPress={handlePress}/>
                 </View>

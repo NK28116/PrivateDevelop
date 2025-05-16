@@ -23,13 +23,18 @@ const Login =():JSX.Element => {
                     value={email}
                     onChangeText={(text)=>{setEmail(text)}}
                     autoCapitalize={'none'}//自動で先頭を大文字にしない
-                    keyboardType={'email-address'}
+                    keyboardType={'email-address'}//@を見やすくする
+                    placeholder={'Email Address'}
+                    textContentType={'emailAddress'}//キーチェーンに情報があると自動保管
                 />
                 <TextInput
                     style={styles.input}
                     value={password}
                     onChangeText={(text)=>{setPassword(text)}}
                     autoCapitalize={'none'}
+                    secureTextEntry//入力した文字をマスクする
+                    placeholder={'Password'}
+                    textContentType={'password'}
                  />
                 <View style={styles.button}>
                     <Button label={'Submit'} onPress={handlePress} />
