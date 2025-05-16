@@ -86,3 +86,34 @@ LinkのasChildプロパティは透明度を落とす感じ
 submit->login処理->momelist
 
 back buttonはstackでデフォルトなバックボタンを作成できる
+
+router.push('')は今の画面のstackナビゲーションに移動履歴を1つ追加する
+roter.replace('')は今の画面を置き換える
+
+cannnot update component -> reactのcomponentの処理のタイミングで問題が起きている
+```
+    const navigation=useNavigation()
+    navigation.setOptions({
+        headerRight:()=>{
+            return <Text>Test</Text>
+        }
+    })
+```
+が追加されただけだと常にこの処理が走ってしまって問題が起きるのでmemo画面が表示されたら1回だけ表示できるようにしたい
+-> useEffectを使う
+` useEffect(()=>{},[count])`は依存関係を表す
+countが実行されるたびに()=>{}が実行される
+
+```
+    useEffect(()=>{
+        const navigation=useNavigation()
+        navigation.setOptions({
+            headerRight:()=>{
+                return <Text>Test</Text>
+            }
+        })
+    },[])
+```
+としたいがreactHook{expo-router Hook}で問題が出ているのでconst navigationは外に出す
+
+userのinputを受け付けるためにuseStateを使う

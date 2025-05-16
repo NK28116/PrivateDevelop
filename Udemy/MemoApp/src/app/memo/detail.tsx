@@ -29,7 +29,7 @@ const Detail = ():JSX.Element => {
                 </Text>
                 </ScrollView>
             </View>
-            <CircleButton style={{top:160,bottom:'auto'}} onPress={handlePress}>
+            <CircleButton style={{top:60,bottom:'auto'}} onPress={handlePress}>
                <Icon name={'pencil'} size={40} color={'pink'}/>
             </CircleButton>
         </View>

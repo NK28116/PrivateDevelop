@@ -4,19 +4,30 @@ import {Link,router} from "expo-router"
 
 import Header from '../../components/Header'
 import Button from'../../components/Button'
+import {useState} from "react";
 
 const handlePress=():void=>{
     //ログイン処理
-    router.push('/memo/list')
+    router.replace('/memo/list')
 }
 
 const Login =():JSX.Element => {
+    const[email,setEmail]=useState('')
+    const[password,setPassword]=useState('')
     return(
         <View style={styles.container}>
             <View style={styles.inner}>
                 <Text style={styles.title}>Log in</Text>
-                <TextInput style={styles.input} value={'Email Address'} />
-                <TextInput style={styles.input} value={'password'} />
+                <TextInput
+                    style={styles.input}
+                    value={email}
+                    onChangeText={(text)=>{setEmail(text)}}
+                />
+                <TextInput
+                    style={styles.input}
+                    value={password}
+                    onChangeText={(text)=>{setPassword(text)}}
+                 />
                 <View style={styles.button}>
                     <Button label={'Submit'} onPress={handlePress} />
                 </View>
