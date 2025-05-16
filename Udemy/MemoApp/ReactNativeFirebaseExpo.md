@@ -141,3 +141,7 @@ firebase 構築 firebase database
 async-awaitのメリット：コールバックの入れ子を避ける
 
 query(ref)でrefで参照しているものを全て取得
+
+全部データを取得させないで画面に写っている部分だけ表示させたい→FLatList
+
+データベースからデータをもらってきて詳細画に表示

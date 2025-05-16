@@ -1,4 +1,4 @@
-import {View, StyleSheet, Text} from 'react-native'
+import {View, StyleSheet, Text, FlatList} from 'react-native'
 import {JSX, useEffect,useState} from "react";
 import {collection, onSnapshot,query,orderBy } from 'firebase/firestore'
 import {router ,useNavigation} from "expo-router";
@@ -47,12 +47,12 @@ const List = () :JSX.Element=> {
         return unsubscribe//画面が消えた時に監視を止める
     },[])
 
-  return(
-      <View style={styles.container}>
-          <View>
-              {memos.map((memo)=> <MemoListItem memo={memo}/>
-              )}
-          </View>
+    return(
+        <View style={styles.container}>
+            <FlatList
+                data={memos}
+                renderItem ={({item})=><MemoListItem memo={item} />}
+          />
           <CircleButton onPress={handlePress}>
               <Icon name={'plus'} size={40} color={'red'}/>
           </CircleButton>
