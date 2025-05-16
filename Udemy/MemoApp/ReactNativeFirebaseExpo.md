@@ -139,3 +139,4 @@ firebase 構築 firebase database
  reference=documentとcollectionの参照
 
 async-awaitのメリット：コールバックの入れ子を避ける
+
