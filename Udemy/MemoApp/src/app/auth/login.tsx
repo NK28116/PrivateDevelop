@@ -1,16 +1,28 @@
-import {View,Text,StyleSheet, TextInput ,TouchableOpacity} from "react-native";
+import {View, Text, StyleSheet, TextInput, TouchableOpacity, Alert} from "react-native";
 import {JSX} from "react";
 import {Link,router} from "expo-router"
 
 import Header from '../../components/Header'
 import Button from'../../components/Button'
 import {useState} from "react";
+import {signInWithEmailAndPassword} from "firebase/auth";
+import {auth} from "../../config";
 
-const handlePress=():void=>{
+const handlePress=(email:string,password:string):void=>{
     //ログイン処理
-    router.replace('/memo/list')
-}
+    console.log(email,password)//terminal log
+    signInWithEmailAndPassword(auth,email,password)
+        .then((userCredential)=>{
+            console.log(userCredential.user.uid)
+            router.replace('/memo/list')
+        })//成功した時に実行されるコールバック関数
+        .catch((error)=>{
+            const {code,message}=error
+            console.log(code,message)
+            Alert.alert(message)
+        })//失敗した時に実行されるコールバック関数
 
+}
 const Login =():JSX.Element => {
     const[email,setEmail]=useState('')
     const[password,setPassword]=useState('')
@@ -37,11 +49,14 @@ const Login =():JSX.Element => {
                     textContentType={'password'}
                  />
                 <View style={styles.button}>
-                    <Button label={'Submit'} onPress={handlePress} />
+                    <Button
+                        label={'Submit'}
+                        onPress={()=>{handlePress(email,password)}}
+                    />
                 </View>
                 <View style={styles.footer}>
                     <Text style={styles.footerText}>Not Register?</Text>
-                    <Link href={'/auth/signup'} asChild>
+                    <Link href={'/auth/signup'} asChild replace>
                     <TouchableOpacity>
                         <Text style={styles.footerLink}> Sign up here</Text>
                     </TouchableOpacity>

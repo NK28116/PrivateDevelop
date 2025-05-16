@@ -56,7 +56,7 @@ const SignUp =():JSX.Element => {
                 </View>
                 <View style={styles.footer}>
                     <Text style={styles.footerText}>Already Registered?</Text>
-                    <Link href={"/auth/login"} asChild>
+                    <Link href={"/auth/login"} asChild replace>
                     <TouchableOpacity>
                         <Text style={styles.footerLink}> Login here</Text>
                     </TouchableOpacity>

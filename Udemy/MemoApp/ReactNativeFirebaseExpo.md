@@ -122,3 +122,6 @@ userのinputを受け付けるためにuseStateを使う
 web App登録
 - npx expo install firebase @react-native-async-storage/async-storage
 config.tsの作成
+使用するメアドとパス
+- niwa28116@text.com
+- testpassword
