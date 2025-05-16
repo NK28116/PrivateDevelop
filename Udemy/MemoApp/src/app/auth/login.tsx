@@ -22,11 +22,14 @@ const Login =():JSX.Element => {
                     style={styles.input}
                     value={email}
                     onChangeText={(text)=>{setEmail(text)}}
+                    autoCapitalize={'none'}//自動で先頭を大文字にしない
+                    keyboardType={'email-address'}
                 />
                 <TextInput
                     style={styles.input}
                     value={password}
                     onChangeText={(text)=>{setPassword(text)}}
+                    autoCapitalize={'none'}
                  />
                 <View style={styles.button}>
                     <Button label={'Submit'} onPress={handlePress} />
