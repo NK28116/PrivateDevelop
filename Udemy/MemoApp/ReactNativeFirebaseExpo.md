@@ -117,3 +117,8 @@ countが実行されるたびに()=>{}が実行される
 としたいがreactHook{expo-router Hook}で問題が出ているのでconst navigationは外に出す
 
 userのinputを受け付けるためにuseStateを使う
+
+## login機能をfirebaseを使って実装
+web App登録
+- npx expo install firebase @react-native-async-storage/async-storage
+config.tsの作成
