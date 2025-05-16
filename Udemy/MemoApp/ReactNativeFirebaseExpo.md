@@ -121,7 +121,8 @@ userのinputを受け付けるためにuseStateを使う
 ## login機能をfirebaseを使って実装
 web App登録
 - npx expo install firebase @react-native-async-storage/async-storage
-config.tsの作成
+firebase 構築 　authentication
+- config.tsの作成
 使用するメアドとパス
 - niwa28116@text.com
 - testpassword
@@ -130,3 +131,11 @@ log inの監視
 テストID
 1sy5r94yH@test.com
 p9sEjcMp9E
+
+firebase 構築 firebase database
+ request.time < timestamp.date(2025, 6, 15);を延長すれば読み書きができる期間を伸ばせる
+ firestoreデータモデル
+ collection>document> data
+ reference=documentとcollectionの参照
+
+async-awaitのメリット：コールバックの入れ子を避ける
