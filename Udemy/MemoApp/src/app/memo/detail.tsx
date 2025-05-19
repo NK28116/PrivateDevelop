@@ -1,22 +1,35 @@
 import { View , Text , StyleSheet ,ScrollView} from 'react-native'
-import {JSX} from "react";
+import {JSX, useEffect,useState} from "react";
 import {Feather} from "@expo/vector-icons";
-import {router} from "expo-router";
+import {router,useLocalSearchParams} from "expo-router";
+import {onSnapshot,doc} from "firebase/firestore";
 
 import Header from '../../components/Header'
 import CircleButton from "../../components/CircleButton";
 import Icon from "../../components/Icon";
+import {auth,db} from "../../config";
+import {type Memo} from "../../../types/memo";
 
 const handlePress=():void=>{
     router.push('/memo/edit')
 }
 
 const Detail = ():JSX.Element => {
+    const id=useLocalSearchParams()//listで選択したアイテムのid
+    console.log(id)
+    const [memo,setMemo]=useState<Memo|null>(null)
+    useEffect(()=>{
+        if(auth.currentUser ===null){return}
+        const ref=doc(db,`users/${auth.currentUser.uid}/memmos`, String(id))
+        onSnapshot(ref,(memoDoc)=>{
+            console.log(memoDoc)
+        })
+    },[])//memoのデータを監視
     return (
         <View style={styles.container}>
             <View style={styles.memoHeader}>
-                <Text style={styles.memoTitle}>買い物リスト</Text>
-                <Text style={styles.memoDate}>2025/05/12 09:00</Text>
+                <Text style={styles.memoTitle} numberOfLines={1}>{memo?.bodyText}</Text>
+                <Text style={styles.memoDate}>{memo?.updatedAt?.toDate().toLocaleString('ja-JP')}</Text>
             </View>
             <View>
                 <ScrollView style={styles.memoBody}>
