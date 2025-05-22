@@ -22,7 +22,7 @@ const Detail = ():JSX.Element => {
         if(auth.currentUser ===null){return}
         const ref=doc(db,`users/${auth.currentUser.uid}/memmos`, String(id))
         onSnapshot(ref,(memoDoc)=>{
-            console.log(memoDoc)
+            console.log(memoDoc.data())
         })
     },[])//memoのデータを監視
     return (
