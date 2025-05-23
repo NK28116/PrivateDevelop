@@ -20,7 +20,7 @@ const Detail = ():JSX.Element => {
     const [memo,setMemo]=useState<Memo|null>(null)
     useEffect(()=>{
         if(auth.currentUser ===null){return}
-        const ref=doc(db,`users/${auth.currentUser.uid}/memmos`, String(id))
+        const ref=doc(db,`users/${auth.currentUser.uid}/memos`, String(id))
         onSnapshot(ref,(memoDoc)=>{
             console.log(memoDoc.data())
         })
