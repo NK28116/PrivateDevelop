@@ -154,3 +154,120 @@ firestore-list->detail画面-編集ボタンを押す->edit-完了ボタンを�
 Editだとデータを監視する必要はない
 
 ## 削除を実装
+
+
+## Cloud FireStoreのルール
+```
+rules_version = '2';
+
+service cloud.firestore {
+  match /databases/{database}/documents {
+
+    // This rule allows anyone with your Firestore database reference to view, edit,
+    // and delete all data in your Firestore database. It is useful for getting
+    // started, but it is configured to expire after 30 days because it
+    // leaves your app open to attackers. At that time, all client
+    // requests to your Firestore database will be denied.
+    //
+    // Make sure to write security rules for your app before that time, or else
+    // all client requests to your Firestore database will be denied until you Update
+    // your rules
+    match /{document=**} { 
+    match /users/{userId}/memo/{memo}{ //コレクションの構造を表すように変更
+      allow read, write: if request.time < timestamp.date(2025, 6, 15);
+      alow read, write: if request.auth.uid == userId; // ユーザーIDが一致する場合のみ読み書き可能
+    }
+  }
+}
+```
+現在テストモード（誰でもアクセスできる~2025.6.15）なので別ユーザーが操作できないようにした
+
+
+## リリース，一般公開
+この状態ではアプリの審査に通らない
+- プラットフォームのレギュレーションが変わってきている
+ - ログインをせずにアプリを使えるようにしなければならない(iOS)
+   - 匿名でログインさせる
+ - ログアウト，会員削除できるようにする
+
+## ビルド，提出
+- スプラッシュ画像
+  - アプリの起動時に表示される画像
+- Appアイコン
+  - ホーム画面表示されるアイコン
+- feature画像
+  - Playストアで必要な画像
+- アダプティブアイコン
+  - 2個
+- スクリーンショット
+  - アプリの画面をキャプチャした画像
+
+- アプリのアイコンはapp.jsonのexpo/iconで指定
+- スプラッシュ画像はapp.jsonのexpo/splashで指定
+  - coverに変えるとデバイスによる余白がなくなる
+- adaptiveアイコンはapp.jsonのexpo/android/adaptiveIconで指定
+
+ビルドの設定
+ios
+- support Tablet : タブレットでつかるようにする
+- bundle identifier : com.example.memoapp ,通常は自分のウェブサイトの逆順
+- bundle Number : アプリのバージョン番号
+
+android
+- package: bundle identifierと同値
+- versionCode: アプリのバージョン番号=bundle Number
+- permissions: 配列
+
+EASを使ったビルド
+- EASをインストール
+  - `npm install -g eas-cli`
+  - eas.jsonを作成
+```json
+{
+  "build": {
+    "production": {
+    "env": {
+    "EXPO_PUBLIC_FB_API_KEY": "xxxxxxxx",
+    "EXPO_PUBLIC_FB_AUTH_DOMAIN": "xxxxxxxx",
+    "EXPO_PUBLIC_FB_PROJECT_ID": "xxxxxxxx",
+    "EXPO_PUBLIC_FB_STORAGE_BUCKET": "xxxxxxxx",
+    "EXPO_PUBLIC_FB_MESSAGING_SENDER_ID": "xxxxxxxx",
+    "EXPO_PUBLIC_FB_APP_ID": "xxxxxxxx",
+    "EXPO_PUBLIC_FB_MEASUREMENT_ID": "xxxxxxxx"
+    }
+    },
+    "preview": {
+      "extends": "production",
+      "ios": {
+        "simulator": true
+      },
+      "android": {
+        "buildType": "apk"
+      }
+    }
+  }
+}
+```
+を設定したら
+```shell
+eas login
+eas build-p ios 
+## アップルのデベロッパーアカウントを持っていないと公開できない US$99/year
+Select Team
+Select Provider
+Push Notification
+## プッシュ通知があるかどうか
+Build Deatils : https://expo.dev/accounts/niwa28116/projects/memoapp/builds/0~~~
+```
+
+にアクセスするとexpoで詳細が見れる
+ストアに公開する用のipaファイルがダウンロードできる
+
+シュミレーター用のビルド
+```shell
+eas build -p ios --profile=preview
+```
+終わったらappファイルがダウンロードしてシミュレーターにドラッグ&ドロップすればシミュレーター上で角煮できる
+androidも同様にiosの部分をandroidに変えればできる
+
+あとは審査
