@@ -50,7 +50,7 @@ const SignUp =():JSX.Element => {
                  />
                 <View style={styles.button}>
                      <Button
-                         label={'Submit'}
+                         label={'Sign Up'}
                          onPress={()=>{handlePress(email,password)}}
                      />
                 </View>

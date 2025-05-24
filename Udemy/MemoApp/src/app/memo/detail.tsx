@@ -22,7 +22,7 @@ const Detail = ():JSX.Element => {
         if(auth.currentUser ===null){return}
         const ref=doc(db,`users/${auth.currentUser.uid}/memos`, id)
         const unsubscribe= onSnapshot(ref,(memoDoc)=>{
-            console.log(memoDoc.data())
+            //console.log(memoDoc.data())
             const {bodyText,updatedAt}=memoDoc.data() as Memo
             setMemo({
                 id:memoDoc.id,

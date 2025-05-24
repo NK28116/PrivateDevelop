@@ -1,4 +1,3 @@
-import {View,StyleSheet,TextInput , KeyboardAvoidingView} from 'react-native'
 import {JSX,useEffect,useState} from "react";
 import {doc,getDoc,setDoc,Timestamp} from "firebase/firestore";
 
@@ -7,6 +6,8 @@ import Icon from '../../components/Icon'
 import {router,useLocalSearchParams} from "expo-router";
 
 import {db,auth} from "../../config";
+import KeyboardAvoidingView from "../../components/KeyboardAvoidingView";
+import {TextInput,View,StyleSheet} from "react-native";
 
 const handlePress=(id:string,bodyText:string):void=>{
     if(auth.currentUser === null){return}
@@ -40,13 +41,14 @@ const Edit = () :JSX.Element=> {
         })
     },[])
     return (
-        <KeyboardAvoidingView behavior={'height'} style={styles.container}>
+        <KeyboardAvoidingView style={styles.container}>
             <View style={styles.inputContainer}>
                 <TextInput
                 multiline
                 style={styles.input}
                 value={bodyText}
                 onChangeText={(text)=>{setBodyText(text)}}//memoの内容を編集
+                autoFocus
                 />
             </View>
             <CicleButton onPress={()=>{handlePress(id,bodyText)}}>

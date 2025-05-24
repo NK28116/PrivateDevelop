@@ -2,7 +2,6 @@ import {View, Text, StyleSheet, TextInput, TouchableOpacity, Alert} from "react-
 import {JSX} from "react";
 import {Link,router} from "expo-router"
 
-import Header from '../../components/Header'
 import Button from'../../components/Button'
 import {useState} from "react";
 import {signInWithEmailAndPassword} from "firebase/auth";
@@ -50,7 +49,7 @@ const Login =():JSX.Element => {
                  />
                 <View style={styles.button}>
                     <Button
-                        label={'Submit'}
+                        label={'Log in'}
                         onPress={()=>{handlePress(email,password)}}
                     />
                 </View>

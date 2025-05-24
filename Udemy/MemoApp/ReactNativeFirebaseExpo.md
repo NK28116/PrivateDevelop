@@ -152,3 +152,5 @@ detail からデータベースにアクセスしたいがそのためにはド�
 detailだとhandlePressを押すとmemo/editに遷移するのでここにオブジェクトを入れる
 firestore-list->detail画面-編集ボタンを押す->edit-完了ボタンをプッシュ->firestoreを更新
 Editだとデータを監視する必要はない
+
+## 削除を実装
