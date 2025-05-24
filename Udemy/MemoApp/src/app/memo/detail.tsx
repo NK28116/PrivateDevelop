@@ -10,39 +10,47 @@ import Icon from "../../components/Icon";
 import {auth,db} from "../../config";
 import {type Memo} from "../../../types/memo";
 
-const handlePress=():void=>{
-    router.push('/memo/edit')
+const handlePress=(id:string):void=>{
+    router.push({pathname:"/memo/edit",params:{id}})
 }
 
 const Detail = ():JSX.Element => {
-    const id=useLocalSearchParams()//listで選択したアイテムのid
-    console.log(id)
+    const id=String(useLocalSearchParams().id)//listで選択したアイテムのid
+    //console.log("Detail(id)=",id)
     const [memo,setMemo]=useState<Memo|null>(null)
     useEffect(()=>{
         if(auth.currentUser ===null){return}
-        const ref=doc(db,`users/${auth.currentUser.uid}/memos`, String(id))
-        onSnapshot(ref,(memoDoc)=>{
+        const ref=doc(db,`users/${auth.currentUser.uid}/memos`, id)
+        const unsubscribe= onSnapshot(ref,(memoDoc)=>{
             console.log(memoDoc.data())
+            const {bodyText,updatedAt}=memoDoc.data() as Memo
+            setMemo({
+                id:memoDoc.id,
+                bodyText,
+                updatedAt,
+            })
+            // {"id":"4Lz9CzKoh1jwLH733djb"} undefined>
         })
+        return unsubscribe//クリーンアップ関数を返すことで、コンポーネントがアンマウントされるときにリスナーを解除する;
     },[])//memoのデータを監視
+    //home>user>UJeXGKgOb1QmYVzVPIgcIb57WQu1>memos>BXh3nJMX8cpDefZ9Ib9n
     return (
         <View style={styles.container}>
             <View style={styles.memoHeader}>
-                <Text style={styles.memoTitle} numberOfLines={1}>{memo?.bodyText}</Text>
+                <Text style={styles.memoTitle} numberOfLines={1}>{memo?.bodyText}</Text>{/**numberOfLines={1}は最初の1行*/}
                 <Text style={styles.memoDate}>{memo?.updatedAt?.toDate().toLocaleString('ja-JP')}</Text>
             </View>
             <View>
                 <ScrollView style={styles.memoBody}>
                 <Text style={styles.memoBodyText}>
-                    買い物リスト
-                    寿限無寿限無五劫の擦り切れ海砂利水魚の雲来松風来松
-                    食う寝るところに住むところ
-                    パイポパイポパイポのシューリンガンシューリンガンの
-                    ポンポコピーのポンポコナーの長久名の長助
+                    {memo?.bodyText}
                 </Text>
                 </ScrollView>
             </View>
-            <CircleButton style={{top:60,bottom:'auto'}} onPress={handlePress}>
+            <CircleButton
+            style={{top:60,bottom:'auto'}}
+            onPress={()=>{handlePress(id)}}
+            >
                <Icon name={'pencil'} size={40} color={'pink'}/>
             </CircleButton>
         </View>
@@ -74,9 +82,9 @@ const styles=StyleSheet.create({
         },
         memoBody:{
             paddingHorizontal:27,
-            paddingVertical:32,
         },
         memoBodyText:{
+            paddingVertical:32,
             fontSize:16,
             lineHeight:24,
             color:'#000000'

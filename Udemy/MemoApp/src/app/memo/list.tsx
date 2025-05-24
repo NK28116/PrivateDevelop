@@ -34,7 +34,7 @@ const List = () :JSX.Element=> {
         const unsubscribe= onSnapshot(q,(snapshot)=>{
             const remoteMemos:Memo[]=[]//remoteMemosの型が決まってないとダメ->types/memo.ts
             snapshot.forEach((doc)=>{
-                console.log('memo',doc.data())
+                //console.log("list.tsx/unscribe:",'memo',doc.data())
                 const {bodyText,updatedAt}=doc.data()
                 remoteMemos.push({
                     id:doc.id,

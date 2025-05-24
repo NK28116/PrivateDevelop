@@ -1,22 +1,55 @@
 import {View,StyleSheet,TextInput , KeyboardAvoidingView} from 'react-native'
-import {JSX} from "react";
+import {JSX,useEffect,useState} from "react";
+import {doc,getDoc,setDoc,Timestamp} from "firebase/firestore";
 
-import Header from '../../components/Header'
 import CicleButton from '../../components/CircleButton'
 import Icon from '../../components/Icon'
-import {router} from "expo-router";
+import {router,useLocalSearchParams} from "expo-router";
 
-const handlePress=():void=>{
-    router.back()//1つ前の画面に戻る
+import {db,auth} from "../../config";
+
+const handlePress=(id:string,bodyText:string):void=>{
+    if(auth.currentUser === null){return}
+    const ref=doc(db,`users/${auth.currentUser.uid}/memos`,id)
+    setDoc(ref,{bodyText,updatedAt:Timestamp.fromDate(new Date())})
+    .then(()=>{
+        router.back()//1つ前の画面に戻る
+    })
+    .catch((error)=>{
+        console.log(error)
+        
+    })
+
 }
 
 const Edit = () :JSX.Element=> {
+    const id=String(useLocalSearchParams().id)
+    const [bodyText,setBodyText]=useState('')
+    //console.log("editId",id)
+    useEffect(()=>{
+        if(auth.currentUser === null){return}
+        const ref=doc(db,`users/${auth.currentUser.uid}/memos`,id)
+        getDoc(ref)
+        .then((docRef)=>{
+            //console.log("docRef:",docRef.data())
+            const RemoteBodyText=docRef.data()?.bodyText
+            setBodyText(RemoteBodyText)
+        })
+        .catch((error)=>{
+            console.log(error)
+        })
+    },[])
     return (
         <KeyboardAvoidingView behavior={'height'} style={styles.container}>
             <View style={styles.inputContainer}>
-                <TextInput multiline style={styles.input} value={"買い物\nリスト"}/>
+                <TextInput
+                multiline
+                style={styles.input}
+                value={bodyText}
+                onChangeText={(text)=>{setBodyText(text)}}//memoの内容を編集
+                />
             </View>
-            <CicleButton onPress={handlePress}>
+            <CicleButton onPress={()=>{handlePress(id,bodyText)}}>
                 <Icon name={'check'} size={40} color={'#ffffff'}/>
             </CicleButton>
         </KeyboardAvoidingView>
@@ -28,11 +61,11 @@ const styles=StyleSheet.create({
         flex:1,
     },
     inputContainer:{
-        paddingVertical:32,
-        paddingHorizontal:27,
         flex:1,
     },
     input:{
+        paddingVertical:32,
+        paddingHorizontal:27,
         flex:1,
         textAlignVertical:'top',//androidf
         fontSize:16,
