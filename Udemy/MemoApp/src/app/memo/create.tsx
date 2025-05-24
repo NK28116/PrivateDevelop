@@ -4,7 +4,6 @@ import {router} from "expo-router";
 import {collection,addDoc,Timestamp} from 'firebase/firestore'
 import {useState} from "react";
 
-import Header from '../../components/Header'
 import CicleButton from '../../components/CircleButton'
 import Icon from '../../components/Icon'
 import { db,auth } from '../../config'
