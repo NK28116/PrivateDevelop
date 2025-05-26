@@ -3,9 +3,9 @@ import {JSX} from "react";
 import {Link} from "expo-router"
 import {deleteDoc,doc} from "firebase/firestore"
 
-import {auth,db} from "../../firebaseConfig"
+import {auth,db} from "@/firebaseConfig"
 import Icon from './Icon'
-import {type Memo} from "../../types/memo";
+import {type Memo} from "@/types/memo";
 interface Props{
     memo: Memo
 }

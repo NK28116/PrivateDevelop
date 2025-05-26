@@ -5,7 +5,7 @@ import CicleButton from '../../components/CircleButton'
 import Icon from '../../components/Icon'
 import {router,useLocalSearchParams} from "expo-router";
 
-import {db,auth} from "../../../firebaseConfig";
+import {db,auth} from "@/firebaseConfig";
 import KeyboardAvoidingView from "../../components/KeyboardAvoidingView";
 import {TextInput,View,StyleSheet} from "react-native";
 

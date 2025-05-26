@@ -9,8 +9,8 @@ import CircleButton from "../../components/CircleButton";
 import {Feather} from "@expo/vector-icons";
 import Icon from '../../components/Icon'
 import LogOutButton from "../../components/logout";
-import {db,auth} from "../../../firebaseConfig";
-import {type Memo} from "../../../types/memo";
+import {db,auth} from "@/firebaseConfig";
+import {type Memo} from "@/types/memo";
 
 
 const handlePress =():void=>{
