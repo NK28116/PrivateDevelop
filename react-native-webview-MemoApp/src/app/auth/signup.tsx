@@ -3,8 +3,7 @@ import {JSX, useState} from "react";
 import {Link, router} from "expo-router"
 import {createUserWithEmailAndPassword} from 'firebase/auth'
 
-import {auth} from "../../../firebaseConfig";
-import Header from '../../components/Header'
+import {auth} from "@/firebaseConfig";
 import Button from '../../components/Button'
 
 const handlePress=(email:string,password:string):void=>{

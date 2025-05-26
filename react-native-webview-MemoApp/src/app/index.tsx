@@ -2,7 +2,7 @@ import {Redirect, router} from "expo-router";
 import {JSX} from 'react'
 import {onAuthStateChanged} from "firebase/auth"
 import {useEffect} from "react";
-import {auth} from "../../firebaseConfig";
+import {auth} from "@/firebaseConfig";
 
 const Index = ():JSX.Element => {
 
