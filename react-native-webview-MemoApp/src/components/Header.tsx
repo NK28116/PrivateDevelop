@@ -1,6 +1,6 @@
 import {View,Text,StyleSheet} from 'react-native'
 import {JSX} from "react";
-'use dom';
+
 const Header = () :JSX.Element=> {
     return (
         <View style={styles.header}>

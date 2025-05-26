@@ -3,13 +3,13 @@ import {JSX} from "react";
 import {Link} from "expo-router"
 import {deleteDoc,doc} from "firebase/firestore"
 
-import {auth,db} from "../config"
+import {auth,db} from "../../firebaseConfig"
 import Icon from './Icon'
 import {type Memo} from "../../types/memo";
 interface Props{
     memo: Memo
 }
-'use dom';
+
 const handlePress=(id:string):void=>{
     if(auth.currentUser === null){return}
     const ref=doc(db,`users/${auth.currentUser.uid}/memos`,id)

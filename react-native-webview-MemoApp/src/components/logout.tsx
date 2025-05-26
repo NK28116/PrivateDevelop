@@ -2,9 +2,7 @@ import {TouchableOpacity, Text, StyleSheet, Alert} from "react-native";
 import {JSX} from "react";
 import {signOut} from 'firebase/auth'
 import{router} from 'expo-router'
-'use dom';
-
-import {auth} from "../config";
+import {auth} from "../../firebaseConfig";
 
 const handlePress=():void=>{
     signOut(auth)

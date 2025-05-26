@@ -7,9 +7,9 @@ import {onSnapshot,doc} from "firebase/firestore";
 import Header from '../../components/Header'
 import CircleButton from "../../components/CircleButton";
 import Icon from "../../components/Icon";
-import {auth,db} from "../../config";
+import {auth,db} from "../../../firebaseConfig";
 import {type Memo} from "../../../types/memo";
-'use dom';
+
 const handlePress=(id:string):void=>{
     router.push({pathname:"/memo/edit",params:{id}})
 }

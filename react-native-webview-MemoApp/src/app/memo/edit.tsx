@@ -5,10 +5,10 @@ import CicleButton from '../../components/CircleButton'
 import Icon from '../../components/Icon'
 import {router,useLocalSearchParams} from "expo-router";
 
-import {db,auth} from "../../config";
+import {db,auth} from "../../../firebaseConfig";
 import KeyboardAvoidingView from "../../components/KeyboardAvoidingView";
 import {TextInput,View,StyleSheet} from "react-native";
-'use dom';
+
 const handlePress=(id:string,bodyText:string):void=>{
     if(auth.currentUser === null){return}
     const ref=doc(db,`users/${auth.currentUser.uid}/memos`,id)

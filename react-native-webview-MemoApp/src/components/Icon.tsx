@@ -4,7 +4,7 @@ import {useFonts} from "expo-font";
 import fontData from '../../assets/fonts/icomoon.ttf'
 import fontSelection from '../../assets/fonts/selction.json'
 import {JSX} from "react";
-'use dom';
+
 const CustomIcon = createIconSetFromIcoMoon(
     fontSelection,
     'IcoMoon',
