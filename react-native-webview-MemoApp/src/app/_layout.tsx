@@ -1,8 +1,10 @@
-import {Slot, Stack} from 'expo-router'
+import {Stack} from 'expo-router'
 import {JSX} from 'react'
 
 const Layout = ():JSX.Element => {
-    return <Stack  screenOptions={{
+    return (
+            <>
+        <Stack  screenOptions={{
                        headerStyle:{
                            backgroundColor:'#467FD3'
                        },
@@ -14,6 +16,8 @@ const Layout = ():JSX.Element => {
                            fontWeight:'bold',
                        },
                    }}/>
+            </>
+                   )
 }
 
 export default Layout

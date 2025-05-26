@@ -5,8 +5,8 @@ import {Link,router} from "expo-router"
 import Button from'../../components/Button'
 import {useState} from "react";
 import {signInWithEmailAndPassword} from "firebase/auth";
-import {auth} from "../../config";
-'use dom';
+import {auth} from "../../../firebaseConfig";
+
 const handlePress=(email:string,password:string):void=>{
     //ログイン処理
     console.log(email,password)//terminal log

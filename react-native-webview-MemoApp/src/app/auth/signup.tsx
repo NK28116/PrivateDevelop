@@ -3,10 +3,10 @@ import {JSX, useState} from "react";
 import {Link, router} from "expo-router"
 import {createUserWithEmailAndPassword} from 'firebase/auth'
 
-import {auth} from "../../config";
+import {auth} from "../../../firebaseConfig";
 import Header from '../../components/Header'
 import Button from '../../components/Button'
-'use dom';
+
 const handlePress=(email:string,password:string):void=>{
     //会員登録処理
     console.log(email,password)//terminal log

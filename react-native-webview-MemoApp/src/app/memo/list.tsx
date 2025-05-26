@@ -9,9 +9,9 @@ import CircleButton from "../../components/CircleButton";
 import {Feather} from "@expo/vector-icons";
 import Icon from '../../components/Icon'
 import LogOutButton from "../../components/logout";
-import {db,auth} from "../../config";
+import {db,auth} from "../../../firebaseConfig";
 import {type Memo} from "../../../types/memo";
-'use dom';
+
 
 const handlePress =():void=>{
     router.push('/memo/create')
