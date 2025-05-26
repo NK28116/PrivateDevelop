@@ -6,7 +6,7 @@ import Button from'../../components/Button'
 import {useState} from "react";
 import {signInWithEmailAndPassword} from "firebase/auth";
 import {auth} from "../../config";
-
+'use dom';
 const handlePress=(email:string,password:string):void=>{
     //ログイン処理
     console.log(email,password)//terminal log

@@ -11,7 +11,7 @@ import Icon from '../../components/Icon'
 import LogOutButton from "../../components/logout";
 import {db,auth} from "../../config";
 import {type Memo} from "../../../types/memo";
-
+'use dom';
 
 const handlePress =():void=>{
     router.push('/memo/create')

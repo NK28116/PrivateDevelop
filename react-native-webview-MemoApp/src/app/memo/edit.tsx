@@ -8,7 +8,7 @@ import {router,useLocalSearchParams} from "expo-router";
 import {db,auth} from "../../config";
 import KeyboardAvoidingView from "../../components/KeyboardAvoidingView";
 import {TextInput,View,StyleSheet} from "react-native";
-
+'use dom';
 const handlePress=(id:string,bodyText:string):void=>{
     if(auth.currentUser === null){return}
     const ref=doc(db,`users/${auth.currentUser.uid}/memos`,id)
