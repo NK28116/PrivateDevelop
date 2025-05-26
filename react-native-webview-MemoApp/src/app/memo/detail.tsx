@@ -9,7 +9,7 @@ import CircleButton from "../../components/CircleButton";
 import Icon from "../../components/Icon";
 import {auth,db} from "../../config";
 import {type Memo} from "../../../types/memo";
-
+'use dom';
 const handlePress=(id:string):void=>{
     router.push({pathname:"/memo/edit",params:{id}})
 }

@@ -1,6 +1,7 @@
 import {View,Text,StyleSheet, TouchableOpacity, Alert} from "react-native";
 import {JSX} from "react";
 
+'use dom';
 interface Props{
     label:string
     onPress?:()=>void

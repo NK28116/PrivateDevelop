@@ -1,5 +1,6 @@
 import {View, Text, StyleSheet, ViewStyle,TouchableOpacity} from 'react-native'
 import {JSX} from "react"
+'use dom';
 
 interface Props{
     children:JSX.Element

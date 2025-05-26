@@ -3,7 +3,7 @@ import React, { useRef, useState, useEffect } from 'react'
 import {
   Keyboard, Dimensions, Animated
 } from 'react-native'
-
+'use dom';
 const KeyboardSafeView = ({ children, style }) => {
   const initialViewHeight = useRef(null)
   const animatedViewHeight = useRef(null)

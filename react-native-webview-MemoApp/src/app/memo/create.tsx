@@ -8,7 +8,7 @@ import CicleButton from '../../components/CircleButton'
 import Icon from '../../components/Icon'
 import { db,auth } from '../../config'
 import KeyboardAvoidingView from '../../components/KeyboardAvoidingView'
-
+'use dom';
 const handlePress= async (bodyText:string):void=>{
     if(auth.currentUser === null){return}
     const ref =collection(db,`users/${auth.currentUser.uid}/memos`)//「``」は文字列の中で変数を使いたい時に使う
