@@ -7,6 +7,9 @@
 # git
 .git/
 
+#gitHub
+.github/
+
 # dependencies
 node_modules/
 package-lock.json
