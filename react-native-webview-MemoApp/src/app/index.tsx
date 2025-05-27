@@ -2,13 +2,10 @@ import {Redirect, router} from "expo-router";
 import {JSX} from 'react'
 import {onAuthStateChanged} from "firebase/auth"
 import {useEffect} from "react";
-import {auth} from "../config";
+import {auth} from "@/firebaseConfig";
 
 const Index = ():JSX.Element => {
-<<<<<<< HEAD
-=======
 
->>>>>>> fe9d2c4e (web-viewの準備)
     useEffect(()=>{
         onAuthStateChanged(auth,(user)=>{
             if (user!==null){
