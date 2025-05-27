@@ -20,8 +20,13 @@
     "expo-router": "~5.0.7",
     "expo-status-bar": "~2.2.3",
     "firebase": "^11.8.1",
+<<<<<<<< HEAD:react-native-webview-MemoApp/package.json
     "react": "19.0.0",
     "react-dom": "19.0.0",
+========
+    "react": "^19.1.0",
+    "react-dom": "^19.1.0",
+>>>>>>>> 17bc622caf86f39557324f4ed8002d0c7b9d4a16:react-native-webview-MemoApp/Udemy/MemoApp/package.json
     "react-native": "0.79.2",
     "react-native-gesture-handler": "~2.24.0",
     "react-native-safe-area-context": "5.4.0",

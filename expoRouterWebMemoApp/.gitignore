@@ -32,12 +32,7 @@ yarn-error.*
 
 # local env files
 .env*.local
+.env
 
 # typescript
 *.tsbuildinfo
-
-<<<<<<< HEAD:hello-niwa/.gitignore
-app-example
-=======
-.idea
->>>>>>> 641af0f7 (git ignore):expoRouterWebMemoApp/.gitignore
