@@ -5,10 +5,6 @@ import {useEffect} from "react";
 import {auth} from "../config";
 
 const Index = ():JSX.Element => {
-<<<<<<< HEAD
-=======
-
->>>>>>> fe9d2c4e (web-viewの準備)
     useEffect(()=>{
         onAuthStateChanged(auth,(user)=>{
             if (user!==null){
