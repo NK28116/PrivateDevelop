@@ -1,2 +1,1 @@
-Udemy/MemoApp にhttps://docs.expo.dev/guides/dom-components/de
-改変するんもの
+WPAでメモアプリが開くことを確認できたので，GoogleなどのopenID連携を使って，アプリの認証を行う．
