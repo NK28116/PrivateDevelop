@@ -1,5 +1,5 @@
 import { NextResponse } from "next/server"
-import { prisma } from "@/src/lib/prismaClient"
+import { prisma } from "@/src/app/lib/prismaClient"
 import { parse } from "csv-parse/sync"
 import { StreetFighter6 } from "@prisma/client"
 
