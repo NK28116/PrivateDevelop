@@ -1,0 +1,34 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+/**
+ページ全体，背景やコンテンツなど
+パーツなどは個別に設定する
+ */
+  :root {
+    --color-primary: #000000;
+    --color-primary-contrast: #6e8eee;
+    --color-secondary: #ffffff;
+    --color-secondary-contrast: #49b257;
+  }
+
+
+body {
+    color: var(--color-primary);
+    background: var(--color-secondary);
+    padding: 20px 20px  60px;
+    margin: 10px;
+    border-color: cadetblue;
+
+}
+
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+}
+
+input{
+margin:40px;
+}
+

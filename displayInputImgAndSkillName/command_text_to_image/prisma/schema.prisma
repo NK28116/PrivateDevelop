@@ -1,0 +1,25 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+model StreetFighter6 {
+  ID               Int         @id @default(autoincrement())
+  CharacterName    String
+  numPadInput      String
+  SkillName        String      @unique
+  commandImagePath String
+  HitParts         HitPartEnum
+
+  @@unique( fields:[CharacterName,numPadInput],name: "CommandName")
+}
+
+enum HitPartEnum {
+  High
+  Middle
+  Low
+}
