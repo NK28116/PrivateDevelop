@@ -1,8 +1,42 @@
 # util
+ロジックや汎用的な処理
+| ディレクトリ               | 主な目的              | 例                                    |
+| -------------------- | ----------------- | ------------------------------------ |
+| `components/`        | 見た目（UI）の構築        | `<SkillCard />`, `<Button />`        |
+| `util/` または `utils/` | 純粋な関数（状態を持たない）    | `formatDate()`, `loadSkills()`       |
+| `hooks/`             | 状態や副作用を含むロジックの再利用 | `useFetchData()`, `useSkillSearch()` |
 
 ## 概要
 画像関連のutl
 ## 各ファイルの機序
+
+### loadSkillSet.ts
+const skillJsons = loadJsonSkills('skillSet/SF6/Ryu/Normal');
+// 画像は /svg/xxx から参照するので、CommandImagePath は文字列だけでOK
+
+使用例
+```
+import { loadSkills } from './loadSkillSet';
+import { PrismaClient } from '@prisma/client';
+
+const prisma = new PrismaClient();
+
+async function main() {
+  const ryuSkills = loadSkills('SF6', 'Ryu');
+  const chunSkills = loadSkills('SF6', 'ChunLi');
+
+  await prisma.command.createMany({
+    data: [...ryuSkills, ...chunSkills],
+  });
+
+  console.log('Seed complete');
+}
+
+main()
+  .catch(console.error)
+  .finally(() => prisma.$disconnect());
+
+```
 
 ### imageUtl.tsx
 
