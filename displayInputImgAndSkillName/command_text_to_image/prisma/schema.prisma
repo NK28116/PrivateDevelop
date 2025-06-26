@@ -7,15 +7,18 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-model StreetFighter6 {
+model Command {
   ID               Int         @id @default(autoincrement())
+  GameTitle        String
   CharacterName    String
-  numPadInput      String
+  Input      String
   SkillName        String      @unique
-  commandImagePath String
+  CommandImagePath Json
   HitParts         HitPartEnum
 
-  @@unique( fields:[CharacterName,numPadInput],name: "CommandName")
+  @@unique( fields:[GameTitle,CharacterName,Input],name: "CommandPerCharacter")
+  @@unique( fields:[GameTitle,CharacterName,SkillName],name: "SkillPerCharacter")
+
 }
 
 enum HitPartEnum {

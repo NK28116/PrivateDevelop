@@ -5,7 +5,7 @@
 /.pnp
 .pnp.js
 .yarn/install-state.gz
-
+yarn-lock.yaml
 # testing
 /coverage
 
@@ -35,3 +35,5 @@ yarn-error.log*
 *.tsbuildinfo
 next-env.d.ts
 
+/prisma/migrations/20250625023851_init/migration.sql
+/prisma/migrations/migration_lock.toml

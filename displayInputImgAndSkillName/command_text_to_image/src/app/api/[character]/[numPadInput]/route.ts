@@ -1,5 +1,5 @@
 import { NextResponse } from "next/server"
-import { prisma } from "@/src/lib/prismaClient"
+import { prisma } from "@/src/app/lib/prismaClient"
 
 type Params = {
   character: string
