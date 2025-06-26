@@ -16,7 +16,7 @@ PRを作成することでフォルダを増やしていく
   - Vite+Vue
 - React 19 を使って勝率計算ページ[https://github.com/NK28116/PrivateDevelop/pull/4]
   - 全部書き直すレベル
-- {NextjsのApp Router,prisma.schemaを使ってテンキー表記のコンボから技名のコンボに変換
+- {NextjsのApp Router,prisma.schemaを使ってテンキー表記のコンボから技名のコンボに変換[https://github.com/NK28116/PrivateDevelop/pull/19]
   - 例”236HP>623LP”を入力したら"（↓↘️→HPの画像）＞（→↓↘︎LPの画像）"と”強波動から弱昇竜”を表示する[]
   - 別リポジトリにあるはずなのでPrivateDevelopの下に落とす
   - graphQLも使いたい
