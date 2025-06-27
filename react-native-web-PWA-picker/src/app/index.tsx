@@ -1,9 +1,10 @@
 import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
 import { useState, JSX } from 'react';
-import CustomWheelPicker from '@/src/components/CustomWheelPicker';
+import CustomWheelPicker from "@/src/app/components/CutomWheelPicker";
+
 
 const Index = (): JSX.Element => {
-  const [birthDate, setBirthDate] = useState('2025/12/22');
+const [birthDate, setBirthDate] = useState('2025-12-22'); // ← ISO形式に統一
   const [showPicker, setShowPicker] = useState(false);
 
   return (
@@ -24,6 +25,7 @@ const Index = (): JSX.Element => {
             onConfirm={(value) => {
                 setBirthDate(value);
                 setShowPicker(false);
+                console.log(value);
               }}
               onCancel={() => setShowPicker(false)}
             />

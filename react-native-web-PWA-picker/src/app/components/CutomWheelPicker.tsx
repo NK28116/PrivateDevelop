@@ -10,6 +10,7 @@ import {
   NativeSyntheticEvent,
   NativeScrollEvent,
 } from 'react-native';
+import {Button} from "react-native-elements";
 
 type Props = {
   dataset: string[];
@@ -43,6 +44,12 @@ const CustomWheelPicker = ({
     setSelectedIndex(index);
   };
 
+  const handleScroll = (e: NativeSyntheticEvent<NativeScrollEvent>) => {
+    const y = e.nativeEvent.contentOffset.y;
+    const index = Math.round(y / ITEM_HEIGHT);
+    setSelectedIndex(index);
+  };
+
   const confirmValue = () => {
     onConfirm(dataset[selectedIndex]);
   };
@@ -56,9 +63,9 @@ const CustomWheelPicker = ({
             <TouchableOpacity onPress={onCancel}>
               <Text style={styles.cancelText}>キャンセル</Text>
             </TouchableOpacity>
-            <TouchableOpacity onPress={confirmValue}>
-              <Text style={styles.doneText}>完了</Text>
-            </TouchableOpacity>
+
+            <Button onPress={confirmValue} >
+            </Button>
           </View>
 
           {/* ホイール本体 */}
@@ -68,6 +75,8 @@ const CustomWheelPicker = ({
               snapToInterval={ITEM_HEIGHT}
               decelerationRate="fast"
               showsVerticalScrollIndicator={false}
+                onScroll={handleScroll} // 👈 追加
+                scrollEventThrottle={16} // 👈 忘れずに
               onMomentumScrollEnd={handleScrollEnd}
               contentContainerStyle={{ paddingVertical: ITEM_HEIGHT * 2 }}
             >
